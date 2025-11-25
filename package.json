@@ -1,0 +1,49 @@
+{
+  "name": "@silverassist/icons",
+  "version": "0.1.0",
+  "description": "Icon library for SilverAssist - Next.js compatible React icon components",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "convert-svg": "node scripts/convert-svg.js",
+    "generate-list": "node scripts/generate-icons-list.js",
+    "bulk-convert": "node scripts/bulk-convert.js"
+  },
+  "keywords": [
+    "react",
+    "icons",
+    "nextjs",
+    "svg",
+    "silver",
+    "components"
+  ],
+  "author": "Silver Assist Team",
+  "license": "Polyform Noncommercial License 1.0.0",
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "react": "^18.2.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  }
+}
