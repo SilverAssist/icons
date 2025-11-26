@@ -140,24 +140,36 @@ function usesSmallIconFill(svg) {
 
 /**
  * Detect if SVG uses white color instead of default fill color
- * Only returns true if SVG has fill="white" AND does NOT have fill="#E3F7FB"
+ * Only returns true if SVG has fill="white" AND does NOT have other fill colors
+ * Returns false if SVG also has black or gray (those map to stroke, so default fill should be #E3F7FB)
  * @param {string} svg - SVG content string
- * @returns {boolean} True if SVG uses ONLY white fill (no #E3F7FB)
+ * @returns {boolean} True if SVG uses ONLY white fill (no other colors)
  */
 function usesWhiteFill(svg) {
   const hasWhite = /fill="white"/i.test(svg);
   const hasDefaultFill = /fill="#E3F7FB"/i.test(svg);
   const hasSmallIconFill = usesSmallIconFill(svg);
-  return hasWhite && !hasDefaultFill && !hasSmallIconFill;
+  const hasBlack = /fill="black"/i.test(svg);
+  const hasGray = /fill="#525252"/i.test(svg);
+
+  // Only use white as default if it's the ONLY color present
+  // If there's black or gray, use standard #E3F7FB default (black/gray will map to stroke)
+  return hasWhite && !hasDefaultFill && !hasSmallIconFill && !hasBlack && !hasGray;
 }
 
 /**
- * Detect if SVG uses stroke
+ * Detect if SVG uses stroke parameter
+ * Returns true if SVG has stroke attribute OR uses black/gray fills (which map to stroke)
  * @param {string} svg - SVG content string
- * @returns {boolean} True if SVG has stroke attribute
+ * @returns {boolean} True if component needs stroke parameter
  */
 function usesStroke(svg) {
-  return /stroke="#3F3F3F"/i.test(svg);
+  const hasStrokeAttr = /stroke="#3F3F3F"/i.test(svg);
+  const hasBlack = /fill="black"/i.test(svg);
+  const hasGray = /fill="#525252"/i.test(svg);
+  const hasStrokeColorInFill = /fill="#3F3F3F"/i.test(svg);
+
+  return hasStrokeAttr || hasBlack || hasGray || hasStrokeColorInFill;
 }
 
 /**
@@ -190,7 +202,7 @@ function replaceColorsWithProps(svg) {
     result = result.replace(/fill="#003073"/gi, "fill={fill}");
   }
 
-  // Replace white fills (only if white is used in the SVG and not small icon)
+  // Only replace white fills if white is the ONLY primary fill color
   if (usesWhiteFill(svg)) {
     result = result.replace(/fill="white"/gi, "fill={fill}");
   }
@@ -203,6 +215,12 @@ function replaceColorsWithProps(svg) {
   // This handles cases where the stroke color (#3F3F3F) is used in fill
   result = result.replace(/fill="#3F3F3F"/gi, "fill={stroke}");
   result = result.replace(/fill="#3f3f3f"/gi, "fill={stroke}");
+
+  // Replace black fills with stroke prop (used for dark details/outlines)
+  result = result.replace(/fill="black"/gi, "fill={stroke}");
+
+  // Replace gray fills (#525252) with stroke prop (used for dark details)
+  result = result.replace(/fill="#525252"/gi, "fill={stroke}");
 
   return result;
 }

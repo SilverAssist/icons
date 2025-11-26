@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Drop icon component
- * Drop
+ * Drop icon
  */
 export default function DropSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
@@ -21,7 +21,7 @@ export default function DropSVG(props: React.ComponentProps<"svg">) {
       />
       <path
         d="M38.8632 69.2724L54.4399 53.6933L64.0035 63.2559L56.3089 70.954L92.057 78.2805L84.7298 42.532L77.0288 50.2289L54.4432 27.6407L38.862 43.2179L20.17 24.5242L7.14251 37.5508L38.8632 69.2724ZM20.1681 28.7659L38.8613 47.4603L54.4414 31.8824L77.0293 54.4719L82.9094 48.5935L88.2042 74.4286L62.3686 69.1342L68.2465 63.2553L54.4406 49.451L38.8636 65.029L11.3837 37.5508L20.1681 28.7659Z"
-        fill="black"
+        fill={stroke}
       />
     </svg>
   );
