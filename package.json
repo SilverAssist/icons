@@ -2,6 +2,14 @@
   "name": "@silverassist/icons",
   "version": "0.1.0",
   "description": "Icon library for SilverAssist - Next.js compatible React icon components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SilverAssist/icons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SilverAssist/icons/issues"
+  },
+  "homepage": "https://github.com/SilverAssist/icons#readme",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
