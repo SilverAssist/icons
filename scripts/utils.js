@@ -119,6 +119,27 @@ function getDefaultSize(svgContent) {
 }
 
 /**
+ * Detect if SVG uses white color instead of default fill color
+ * Only returns true if SVG has fill="white" AND does NOT have fill="#E3F7FB"
+ * @param {string} svg - SVG content string
+ * @returns {boolean} True if SVG uses ONLY white fill (no #E3F7FB)
+ */
+function usesWhiteFill(svg) {
+  const hasWhite = /fill="white"/i.test(svg);
+  const hasDefaultFill = /fill="#E3F7FB"/i.test(svg);
+  return hasWhite && !hasDefaultFill;
+}
+
+/**
+ * Get the default fill color based on SVG content
+ * @param {string} svg - SVG content string
+ * @returns {string} Default fill color (#FFFFFF for white-only, #E3F7FB otherwise)
+ */
+function getDefaultFillColor(svg) {
+  return usesWhiteFill(svg) ? "#FFFFFF" : "#E3F7FB";
+}
+
+/**
  * Replace default color values with React props
  * Replaces fill and stroke attributes with prop references
  * @param {string} svg - SVG content string
@@ -130,6 +151,11 @@ function replaceColorsWithProps(svg) {
   // Replace fill colors (case-insensitive)
   result = result.replace(/fill="#E3F7FB"/gi, "fill={fill}");
   result = result.replace(/fill="#e3f7fb"/gi, "fill={fill}");
+
+  // Replace white fills (only if white is used in the SVG)
+  if (usesWhiteFill(svg)) {
+    result = result.replace(/fill="white"/gi, "fill={fill}");
+  }
 
   // Replace stroke colors when used as stroke attribute (case-insensitive)
   result = result.replace(/stroke="#3F3F3F"/gi, "stroke={stroke}");
@@ -200,6 +226,7 @@ function extractSvgInnerContent(svgContent) {
  * @param {string} innerSvg - SVG content (already processed, indented)
  * @param {number} defaultSize - Default width/height (50 or 100)
  * @param {string} viewBox - ViewBox attribute value
+ * @param {string} defaultFill - Default fill color (defaults to #E3F7FB, or #FFFFFF for white icons)
  * @returns {string} Complete React component code
  */
 function generateComponentTemplate(
@@ -207,7 +234,8 @@ function generateComponentTemplate(
   description,
   innerSvg,
   defaultSize = 100,
-  viewBox = "0 0 100 100"
+  viewBox = "0 0 100 100",
+  defaultFill = "#E3F7FB"
 ) {
   return `import React from 'react';
 
@@ -216,7 +244,12 @@ function generateComponentTemplate(
  * ${description}
  */
 export default function ${componentName}SVG(props: React.ComponentProps<"svg">) {
-  const { width = ${defaultSize}, height = ${defaultSize}, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
+  const {
+    width = ${defaultSize},
+    height = ${defaultSize},
+    fill = "${defaultFill}",
+    stroke = "#3F3F3F",
+  } = props;
   return (
     <svg
       width={width}
@@ -233,7 +266,66 @@ ${innerSvg}
 `;
 }
 
+/**
+ * Update the index file with all icon exports
+ * Regenerates the entire index.ts file with all icons (used by bulk-convert)
+ * @param {string} outputDir - Absolute path to the icons output directory
+ * @param {string[]} iconNames - Array of icon component names (without SVG suffix)
+ */
+function updateIndexFile(outputDir, iconNames) {
+  const fs = require("fs");
+  const path = require("path");
+  const indexPath = path.join(outputDir, "index.ts");
+
+  // Sort icon names alphabetically
+  const sortedNames = [...iconNames].sort();
+
+  // Generate export statements
+  const exports = sortedNames
+    .map((name) => `export { default as ${name}SVG } from "./${name}";`)
+    .join("\n");
+
+  const content = `// Export all icons - Auto-generated
+${exports}
+
+// Total icons: ${sortedNames.length}
+// Generated from Figma SilverAssist Library
+`;
+
+  fs.writeFileSync(indexPath, content, "utf-8");
+}
+
+/**
+ * Add a single icon export to the index file
+ * Adds the export in alphabetical order without duplicating (used by convert-svg)
+ * @param {string} outputDir - Absolute path to the icons output directory
+ * @param {string} iconName - Icon component name (without SVG suffix)
+ */
+function addIconToIndex(outputDir, iconName) {
+  const fs = require("fs");
+  const path = require("path");
+  const indexPath = path.join(outputDir, "index.ts");
+
+  // Read existing content or create new file
+  let existingExports = [];
+  if (fs.existsSync(indexPath)) {
+    const content = fs.readFileSync(indexPath, "utf-8");
+    // Extract existing export lines
+    const exportMatches = content.matchAll(/export \{ default as (\w+)SVG \} from/g);
+    existingExports = Array.from(exportMatches, (m) => m[1]);
+  }
+
+  // Add new icon if not already present
+  if (!existingExports.includes(iconName)) {
+    existingExports.push(iconName);
+  }
+
+  // Regenerate index with all exports
+  updateIndexFile(outputDir, existingExports);
+}
+
 module.exports = {
+  addIconToIndex,
   convertAttributesToCamelCase,
   convertStylesToJSX,
   convertToComponentName,
@@ -241,9 +333,12 @@ module.exports = {
   generateComponentTemplate,
   generateDescription,
   generateDescriptionFromComponentName,
+  getDefaultFillColor,
   getDefaultSize,
   getViewBox,
   indentSvgContent,
   isSmallIcon,
   replaceColorsWithProps,
+  updateIndexFile,
+  usesWhiteFill,
 };

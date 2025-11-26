@@ -14,12 +14,14 @@ const path = require("path");
 const {
   convertAttributesToCamelCase,
   generateComponentTemplate,
+  getDefaultFillColor,
   getViewBox,
   getDefaultSize,
   replaceColorsWithProps,
   convertStylesToJSX,
   indentSvgContent,
   extractSvgInnerContent,
+  updateIndexFile,
 } = require("./utils");
 
 const tempSvgsDir = path.join(__dirname, "../temp-svgs");
@@ -76,6 +78,11 @@ console.log(`Success: ${successCount} | Errors: ${errorCount}`);
 console.log(`${"=".repeat(50)}\n`);
 
 if (successCount > 0) {
+  // Update index.ts with all exports
+  console.log("\n📝 Updating index.ts...");
+  updateIndexFile(outputDir, createdIcons);
+  console.log("✓ Updated index.ts with all exports\n");
+
   // Format all created icons with Prettier
   const { execSync } = require("child_process");
   try {
@@ -105,9 +112,10 @@ function convertSvgToComponent(svgPath, componentName, description) {
   // Extract SVG inner content
   let innerSvg = extractSvgInnerContent(svgContent);
 
-  // Detect icon size and get viewBox/defaultSize
+  // Detect icon size and get viewBox/defaultSize/defaultFill
   const viewBox = getViewBox(svgContent);
   const defaultSize = getDefaultSize(svgContent);
+  const defaultFill = getDefaultFillColor(svgContent);
 
   // Replace default colors with props
   innerSvg = replaceColorsWithProps(innerSvg);
@@ -127,7 +135,8 @@ function convertSvgToComponent(svgPath, componentName, description) {
     description,
     indentedSvg,
     defaultSize,
-    viewBox
+    viewBox,
+    defaultFill
   );
 
   const outputPath = path.join(outputDir, `${componentName}.tsx`);

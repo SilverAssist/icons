@@ -19,9 +19,11 @@
 const fs = require("fs");
 const path = require("path");
 const {
+  addIconToIndex,
   convertAttributesToCamelCase,
   generateDescriptionFromComponentName,
   generateComponentTemplate,
+  getDefaultFillColor,
   getViewBox,
   getDefaultSize,
   replaceColorsWithProps,
@@ -63,6 +65,7 @@ try {
 // Detect icon size and get viewBox/defaultSize
 const viewBox = getViewBox(svgContent);
 const defaultSize = getDefaultSize(svgContent);
+const defaultFill = getDefaultFillColor(svgContent);
 
 // Replace default colors with props
 innerSvg = replaceColorsWithProps(innerSvg);
@@ -82,12 +85,19 @@ const componentTemplate = generateComponentTemplate(
   generateDescriptionFromComponentName(iconName),
   indentedSvg,
   defaultSize,
-  viewBox
+  viewBox,
+  defaultFill
 );
 
 // Write component file
 fs.writeFileSync(outputPath, componentTemplate, "utf-8");
 console.log(`✓ Created ${iconName}.tsx`);
+
+// Update index.ts with new export
+const outputDir = path.join(__dirname, "../src/icons");
+console.log("\n📝 Updating index.ts...");
+addIconToIndex(outputDir, iconName);
+console.log("✓ Added export to index.ts");
 
 // Format with Prettier
 const { execSync } = require("child_process");

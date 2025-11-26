@@ -25,7 +25,7 @@ export default [
     "eslint-config-prettier",
     "prettier",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
+    "plugin:prettier/recommended"
   ),
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
@@ -50,10 +50,7 @@ export default [
     },
     rules: {
       "prettier/prettier": "error",
-      "no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
       "@typescript-eslint/no-require-imports": "off",
     },
   },
@@ -95,18 +92,9 @@ export default [
   },
   {
     files: ["src/icons/**/*.tsx"],
-    rules: {
-      "@typescript-eslint/no-unused-vars": "off",
-    },
+    rules: {},
   },
   {
-    ignores: [
-      "dist/",
-      "node_modules/",
-      "temp-svgs/",
-      "*.config.mjs",
-      "*.config.js",
-      "*.config.ts",
-    ],
+    ignores: ["dist/", "node_modules/", "temp-svgs/", "*.config.mjs", "*.config.js", "*.config.ts"],
   },
 ];
