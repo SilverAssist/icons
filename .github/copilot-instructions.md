@@ -197,3 +197,49 @@ function GenerateDescription(icon_name) { /* ... */ }
 - Use JSDoc for all exported functions
 - Inline comments for complex logic
 - Keep comments concise and in English
+
+## Publishing to NPM
+
+**Package is published under the `@silverassist` organization scope.**
+
+### Prerequisites
+1. NPM account with access to `@silverassist` organization
+2. Login to npm: `npm login`
+3. Build must pass: `npm run build`
+
+### Publishing Process
+
+**First time (initial publish):**
+```bash
+npm run build
+npm publish --access public
+```
+
+**Updates (version increments):**
+```bash
+# Increment version first
+npm version patch  # 0.1.0 → 0.1.1 (bug fixes)
+npm version minor  # 0.1.0 → 0.2.0 (new features)
+npm version major  # 0.1.0 → 1.0.0 (breaking changes)
+
+# Publish (prepublishOnly script runs build automatically)
+npm publish
+```
+
+### Important Notes
+- Scoped packages (`@silverassist/*`) are private by default - use `--access public`
+- Only `dist/` and `README.md` are published (see `files` in package.json)
+- `prepublishOnly` script ensures build runs before publishing
+- Version must be incremented for each publish
+- License: Polyform Noncommercial License 1.0.0 (NOT MIT)
+
+### Package Installation
+Users install with:
+```bash
+npm install @silverassist/icons
+```
+
+Then import icons:
+```tsx
+import { QualitySVG, HealthcareSVG } from '@silverassist/icons';
+```
