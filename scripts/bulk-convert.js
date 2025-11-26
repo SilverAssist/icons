@@ -79,9 +79,13 @@ console.log(`Success: ${successCount} | Errors: ${errorCount}`);
 console.log(`${"=".repeat(50)}\n`);
 
 if (successCount > 0) {
-  // Update index.ts with all exports
+  // Update index.ts with ALL icons (not just newly created ones)
   console.log("\n📝 Updating index.ts...");
-  updateIndexFile(outputDir, createdIcons);
+  const allIcons = fs
+    .readdirSync(outputDir)
+    .filter((file) => file.endsWith(".tsx") && file !== "index.ts")
+    .map((file) => file.replace(".tsx", ""));
+  updateIndexFile(outputDir, allIcons);
   console.log("✓ Updated index.ts with all exports\n");
 
   // Format all created icons with Prettier

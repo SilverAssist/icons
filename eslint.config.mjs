@@ -92,7 +92,9 @@ export default [
   },
   {
     files: ["src/icons/**/*.tsx"],
-    rules: {},
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+    },
   },
   {
     ignores: ["dist/", "node_modules/", "temp-svgs/", "*.config.mjs", "*.config.js", "*.config.ts"],
