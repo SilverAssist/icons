@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Bedroom icon component
- * Bedroom icon
+ * Bedroom
  */
 export default function BedroomSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;

@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Community icon component
- * Community icon
+ * Community
  */
 export default function CommunitySVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;

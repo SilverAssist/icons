@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * CheckMarkCircle icon component
- * Check Mark Circle icon
+ * Check Mark Circle
  */
 export default function CheckMarkCircleSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function CheckMarkCircleSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_66">
-          <rect width="40" height="40" fill={fill} transform="translate(5 5)" />
+          <rect width="40" height="40" fill="white" transform="translate(5 5)" />
         </clipPath>
       </defs>
     </svg>

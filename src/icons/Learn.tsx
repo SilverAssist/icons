@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Learn icon component
- * Learn icon
+ * Learn
  */
 export default function LearnSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -55,7 +55,7 @@ export default function LearnSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_168">
-          <rect width="37" height="36" fill={fill} transform="translate(7 6.99976)" />
+          <rect width="37" height="36" fill="white" transform="translate(7 6.99976)" />
         </clipPath>
       </defs>
     </svg>

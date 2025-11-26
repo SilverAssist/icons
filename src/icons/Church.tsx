@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Church icon component
- * Church icon
+ * Church
  */
 export default function ChurchSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function ChurchSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_204">
-          <rect width="41" height="41" fill={fill} transform="translate(4 4.99976)" />
+          <rect width="41" height="41" fill="white" transform="translate(4 4.99976)" />
         </clipPath>
       </defs>
     </svg>

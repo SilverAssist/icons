@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Hospital icon component
- * Hospital icon
+ * Hospital
  */
 export default function HospitalSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;

@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * DogTags icon component
- * Dog Tags icon
+ * dog tags
  */
 export default function DogTagsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;

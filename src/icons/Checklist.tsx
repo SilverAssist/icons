@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Checklist icon component
- * Checklist icon
+ * Checklist
  */
 export default function ChecklistSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function ChecklistSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_221">
-          <rect width="37" height="37" fill={fill} transform="translate(6 6.99976)" />
+          <rect width="37" height="37" fill="white" transform="translate(6 6.99976)" />
         </clipPath>
       </defs>
     </svg>

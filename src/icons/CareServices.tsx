@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * CareServices icon component
- * Care Services icon
+ * Care Services
  */
 export default function CareServicesSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -27,7 +27,7 @@ export default function CareServicesSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_211">
-          <rect width="40" height="39" fill={fill} transform="translate(5 4.99976)" />
+          <rect width="40" height="39" fill="white" transform="translate(5 4.99976)" />
         </clipPath>
       </defs>
     </svg>

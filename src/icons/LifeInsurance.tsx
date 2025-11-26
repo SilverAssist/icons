@@ -2,16 +2,16 @@ import React from "react";
 
 /**
  * LifeInsurance icon component
- * Life Insurance icon
+ * Life Insurance
  */
 export default function LifeInsuranceSVG(props: React.ComponentProps<"svg">) {
-  const { width = 100, height = 100, fill = "#003073" } = props;
+  const { width = 53, height = 53, fill = "#003073" } = props;
   return (
     <svg
       width={width}
       height={height}
       {...props}
-      viewBox="0 0 100 100"
+      viewBox="0 0 53 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -27,7 +27,7 @@ export default function LifeInsuranceSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_44">
-          <rect width="40" height="35.102" fill={fill} transform="translate(6.03967 7.00012)" />
+          <rect width="40" height="35.102" fill="white" transform="translate(6.03967 7.00012)" />
         </clipPath>
       </defs>
     </svg>

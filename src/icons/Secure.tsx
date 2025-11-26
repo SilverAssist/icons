@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Secure icon component
- * Secure icon
+ * Secure
  */
 export default function SecureSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;

@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * MoneyBag icon component
- * Money Bag icon
+ * money bag
  */
 export default function MoneyBagSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -29,13 +29,13 @@ export default function MoneyBagSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_97">
-          <rect width="36.4444" height="40" fill={fill} transform="translate(7 4.99976)" />
+          <rect width="36.4444" height="40" fill="white" transform="translate(7 4.99976)" />
         </clipPath>
         <clipPath id="clip1_133_97">
           <rect
             width="34.6667"
             height="38.2222"
-            fill={fill}
+            fill="white"
             transform="translate(7.88892 5.88867)"
           />
         </clipPath>

@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Receipt icon component
- * Receipt icon
+ * receipt
  */
 export default function ReceiptSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function ReceiptSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_94">
-          <rect width="31.0204" height="40" fill={fill} transform="translate(9 4.99976)" />
+          <rect width="31.0204" height="40" fill="white" transform="translate(9 4.99976)" />
         </clipPath>
       </defs>
     </svg>

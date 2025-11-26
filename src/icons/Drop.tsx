@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Drop icon component
- * Drop icon
+ * Drop
  */
 export default function DropSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;

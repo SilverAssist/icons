@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * HeartHeadset icon component
- * Heart Headset icon
+ * Heart Headset
  */
 export default function HeartHeadsetSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -31,7 +31,7 @@ export default function HeartHeadsetSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_73">
-          <rect width="40" height="32.6531" fill={fill} transform="translate(5 9)" />
+          <rect width="40" height="32.6531" fill="white" transform="translate(5 9)" />
         </clipPath>
       </defs>
     </svg>

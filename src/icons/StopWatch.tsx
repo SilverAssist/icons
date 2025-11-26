@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * StopWatch icon component
- * Stop Watch icon
+ * stop watch
  */
 export default function StopWatchSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function StopWatchSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_83">
-          <rect width="40" height="36.6667" fill={fill} transform="translate(5 7)" />
+          <rect width="40" height="36.6667" fill="white" transform="translate(5 7)" />
         </clipPath>
       </defs>
     </svg>

@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * RealEstate icon component
- * Real Estate icon
+ * Real Estate
  */
 export default function RealEstateSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -24,7 +24,7 @@ export default function RealEstateSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_40">
-          <rect width="40" height="39.6635" fill={fill} transform="translate(5 4.99988)" />
+          <rect width="40" height="39.6635" fill="white" transform="translate(5 4.99988)" />
         </clipPath>
       </defs>
     </svg>

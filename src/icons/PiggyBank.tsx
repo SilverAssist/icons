@@ -2,16 +2,16 @@ import React from "react";
 
 /**
  * PiggyBank icon component
- * Piggy Bank icon
+ * Piggy Bank
  */
 export default function PiggyBankSVG(props: React.ComponentProps<"svg">) {
-  const { width = 100, height = 100, fill = "#003073" } = props;
+  const { width = 52, height = 52, fill = "#003073" } = props;
   return (
     <svg
       width={width}
       height={height}
       {...props}
-      viewBox="0 0 100 100"
+      viewBox="0 0 52 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

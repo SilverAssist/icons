@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Married icon component
- * Married icon
+ * married
  */
 export default function MarriedSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function MarriedSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_91">
-          <rect width="35.7447" height="40" fill={fill} transform="translate(7 4.99988)" />
+          <rect width="35.7447" height="40" fill="white" transform="translate(7 4.99988)" />
         </clipPath>
       </defs>
     </svg>

@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Calculator icon component
- * Calculator icon
+ * Calculator
  */
 export default function CalculatorSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function CalculatorSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_79">
-          <rect width="28.8" height="40" fill={fill} transform="translate(11 5)" />
+          <rect width="28.8" height="40" fill="white" transform="translate(11 5)" />
         </clipPath>
       </defs>
     </svg>

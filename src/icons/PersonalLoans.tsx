@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * PersonalLoans icon component
- * Personal Loans icon
+ * Personal Loans
  */
 export default function PersonalLoansSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function PersonalLoansSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_50">
-          <rect width="40" height="32" fill={fill} transform="translate(5 9)" />
+          <rect width="40" height="32" fill="white" transform="translate(5 9)" />
         </clipPath>
       </defs>
     </svg>

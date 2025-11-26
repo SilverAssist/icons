@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Transition icon component
- * Transition icon
+ * transition
  */
 export default function TransitionSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -27,7 +27,7 @@ export default function TransitionSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_148">
-          <rect width="31.6667" height="40" fill={fill} transform="translate(9 4.99976)" />
+          <rect width="31.6667" height="40" fill="white" transform="translate(9 4.99976)" />
         </clipPath>
       </defs>
     </svg>

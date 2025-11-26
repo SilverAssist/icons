@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * XIcon icon component
- * X Icon icon
+ * x icon
  */
 export default function XIconSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function XIconSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_70">
-          <rect width="40" height="40" fill={fill} transform="translate(5 5)" />
+          <rect width="40" height="40" fill="white" transform="translate(5 5)" />
         </clipPath>
       </defs>
     </svg>

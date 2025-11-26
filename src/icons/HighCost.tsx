@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * HighCost icon component
- * High Cost icon
+ * high cost
  */
 export default function HighCostSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function HighCostSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_102">
-          <rect width="40" height="38.2979" fill={fill} transform="translate(5 5.99976)" />
+          <rect width="40" height="38.2979" fill="white" transform="translate(5 5.99976)" />
         </clipPath>
       </defs>
     </svg>

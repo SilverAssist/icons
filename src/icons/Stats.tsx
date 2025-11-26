@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Stats icon component
- * Stats icon
+ * stats
  */
 export default function StatsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -24,7 +24,7 @@ export default function StatsSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_132">
-          <rect width="28.5714" height="40" fill={fill} transform="translate(11 4.99976)" />
+          <rect width="28.5714" height="40" fill="white" transform="translate(11 4.99976)" />
         </clipPath>
       </defs>
     </svg>

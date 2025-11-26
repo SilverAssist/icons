@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Icon360Tour icon component
- * Icon360 Tour icon
+ * 360 Tour
  */
 export default function Icon360TourSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -35,7 +35,7 @@ export default function Icon360TourSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_198">
-          <rect width="35" height="45" fill={fill} transform="translate(7 2.99976)" />
+          <rect width="35" height="45" fill="white" transform="translate(7 2.99976)" />
         </clipPath>
       </defs>
     </svg>

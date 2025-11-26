@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * VaBenefits icon component
- * Va Benefits icon
+ * VA Benefits
  */
 export default function VaBenefitsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -27,7 +27,7 @@ export default function VaBenefitsSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_31">
-          <rect width="26.4286" height="40" fill={fill} transform="matrix(-1 0 0 1 38 5)" />
+          <rect width="26.4286" height="40" fill="white" transform="matrix(-1 0 0 1 38 5)" />
         </clipPath>
       </defs>
     </svg>

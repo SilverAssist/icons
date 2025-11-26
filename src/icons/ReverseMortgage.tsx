@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * ReverseMortgage icon component
- * Reverse Mortgage icon
+ * Reverse Mortgage
  */
 export default function ReverseMortgageSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -31,7 +31,7 @@ export default function ReverseMortgageSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_53">
-          <rect width="36.9842" height="40" fill={fill} transform="translate(7 5)" />
+          <rect width="36.9842" height="40" fill="white" transform="translate(7 5)" />
         </clipPath>
       </defs>
     </svg>

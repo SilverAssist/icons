@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * HourGlass icon component
- * Hour Glass icon
+ * hour glass
  */
 export default function HourGlassSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -31,7 +31,7 @@ export default function HourGlassSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_118">
-          <rect width="28.8" height="40" fill={fill} transform="translate(11 4.99976)" />
+          <rect width="28.8" height="40" fill="white" transform="translate(11 4.99976)" />
         </clipPath>
       </defs>
     </svg>

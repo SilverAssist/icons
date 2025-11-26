@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Check icon component
- * Check icon
+ * check
  */
 export default function CheckSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function CheckSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_60">
-          <rect width="40" height="27.5" fill={fill} transform="translate(5 11)" />
+          <rect width="40" height="27.5" fill="white" transform="translate(5 11)" />
         </clipPath>
       </defs>
     </svg>

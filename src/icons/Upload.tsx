@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Upload icon component
- * Upload icon
+ * Upload
  */
 export default function UploadSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;

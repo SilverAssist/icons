@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Box icon component
- * Box icon
+ * box
  */
 export default function BoxSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function BoxSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_136">
-          <rect width="40" height="34.5455" fill={fill} transform="translate(5 7.99976)" />
+          <rect width="40" height="34.5455" fill="white" transform="translate(5 7.99976)" />
         </clipPath>
       </defs>
     </svg>

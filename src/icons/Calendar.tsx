@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Calendar icon component
- * Calendar icon
+ * Calendar
  */
 export default function CalendarSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function CalendarSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_63">
-          <rect width="37.6471" height="40" fill={fill} transform="translate(6 4.99994)" />
+          <rect width="37.6471" height="40" fill="white" transform="translate(6 4.99994)" />
         </clipPath>
       </defs>
     </svg>

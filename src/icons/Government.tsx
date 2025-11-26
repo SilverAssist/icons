@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Government icon component
- * Government icon
+ * Government
  */
 export default function GovernmentSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;

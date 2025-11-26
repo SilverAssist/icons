@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Walker icon component
- * Walker icon
+ * walker
  */
 export default function WalkerSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;

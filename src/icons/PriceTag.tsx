@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * PriceTag icon component
- * Price Tag icon
+ * price tag
  */
 export default function PriceTagSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function PriceTagSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_162">
-          <rect width="40" height="40" fill={fill} transform="translate(5 4.99976)" />
+          <rect width="40" height="40" fill="white" transform="translate(5 4.99976)" />
         </clipPath>
       </defs>
     </svg>

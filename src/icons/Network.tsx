@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Network icon component
- * Network icon
+ * Network
  */
 export default function NetworkSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -35,7 +35,7 @@ export default function NetworkSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_140">
-          <rect width="48" height="40" fill={fill} transform="translate(1 4.99976)" />
+          <rect width="48" height="40" fill="white" transform="translate(1 4.99976)" />
         </clipPath>
       </defs>
     </svg>

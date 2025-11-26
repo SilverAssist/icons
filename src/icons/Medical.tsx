@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Medical icon component
- * Medical icon
+ * medical
  */
 export default function MedicalSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function MedicalSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_152">
-          <rect width="45.5814" height="40" fill={fill} transform="translate(2 4.99976)" />
+          <rect width="45.5814" height="40" fill="white" transform="translate(2 4.99976)" />
         </clipPath>
       </defs>
     </svg>

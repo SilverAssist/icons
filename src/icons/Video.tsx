@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Video icon component
- * Video icon
+ * Video
  */
 export default function VideoSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -25,7 +25,7 @@ export default function VideoSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_195">
-          <rect width="42" height="25" fill={fill} transform="translate(4 12.9998)" />
+          <rect width="42" height="25" fill="white" transform="translate(4 12.9998)" />
         </clipPath>
       </defs>
     </svg>

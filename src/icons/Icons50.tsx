@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Icons50 icon component
- * Icons50 icon
+ * Icons50
  */
 export default function Icons50SVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -23,7 +23,7 @@ export default function Icons50SVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_218">
-          <rect width="33" height="39" fill={fill} transform="translate(8 5.99976)" />
+          <rect width="33" height="39" fill="white" transform="translate(8 5.99976)" />
         </clipPath>
       </defs>
     </svg>

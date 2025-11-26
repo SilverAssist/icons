@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Online icon component
- * Online icon
+ * Online
  */
 export default function OnlineSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
@@ -27,7 +27,7 @@ export default function OnlineSVG(props: React.ComponentProps<"svg">) {
       </g>
       <defs>
         <clipPath id="clip0_133_178">
-          <rect width="40" height="32.1739" fill={fill} transform="translate(5 8.99976)" />
+          <rect width="40" height="32.1739" fill="white" transform="translate(5 8.99976)" />
         </clipPath>
       </defs>
     </svg>
