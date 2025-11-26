@@ -15,7 +15,7 @@ export default function BeautyAndBarberSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_171)">
+      <g clipPath="url(#clip0_128_171)">
       <path d="M19.634 28.8622V32.0511L37.6283 50.0911V40.16L26.3592 28.8622H19.634Z" fill={fill}/>
       <path d="M30.2668 28.8622L37.5372 36.1511V28.8622H30.2668Z" fill="white"/>
       <path d="M28.631 88.1756C32.2662 88.1756 35.3561 85.4422 35.9014 81.98H21.3606C21.9968 85.5333 24.9958 88.1756 28.631 88.1756Z" fill={fill}/>

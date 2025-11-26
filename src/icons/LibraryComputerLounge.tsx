@@ -15,7 +15,7 @@ export default function LibraryComputerLoungeSVG(props: React.ComponentProps<"sv
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_470)">
+      <g clipPath="url(#clip0_128_470)">
       <path d="M63.5586 71.8587H60.4712V75.9895H63.5586V71.8587Z" fill={fill}/>
       <path d="M45.3934 81.4001H78.6379C78.083 79.7685 76.5126 78.588 74.6675 78.588H49.3638C47.5187 78.588 45.9483 79.7685 45.3934 81.4001Z" fill={fill}/>
       <path d="M27.9716 18.6026H20.1785V20.5713H27.9716V18.6026Z" fill="white"/>

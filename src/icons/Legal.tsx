@@ -15,7 +15,7 @@ export default function LegalSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_110)">
+      <g clipPath="url(#clip0_128_110)">
       <path d="M10.2251 55.2857H10.6705L14.9706 59.5143H28.0551L32.3552 55.2857H32.8006V54.2286H10.2251V55.2857Z" fill={fill}/>
       <path d="M44.6239 19.3428C44.6239 19.0767 44.6643 18.8218 44.7027 18.5651L15.6002 22.3821V22.5143H45.7278C45.0463 21.6289 44.6239 20.5378 44.6239 19.3428Z" fill={fill}/>
       <path d="M67.2013 55.2857H67.6467L71.9468 59.5143H85.0313L89.3314 55.2857H89.7768V54.2286H67.2013V55.2857Z" fill={fill}/>

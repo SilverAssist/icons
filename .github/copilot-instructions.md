@@ -54,6 +54,12 @@ export default function IconNameSVG(props: React.ComponentProps<"svg">) {
 - Special chars: `&` becomes `And`, `?` is removed
 - See `CONTRIBUTING.md` for complete workflow and naming details
 
+**Conversion transformations:**
+- Color props: `fill="#E3F7FB"` → `fill={fill}`, `stroke="#3F3F3F"` → `stroke={stroke}`
+- Attribute casing: All SVG attributes converted to camelCase (e.g., `clip-path` → `clipPath`, `stroke-width` → `strokeWidth`)
+- Style objects: `style="..."` → `style={{ ... }}`
+
+
 ## Build System
 
 **Commands:**
@@ -68,7 +74,11 @@ export default function IconNameSVG(props: React.ComponentProps<"svg">) {
 ```
 src/icons/           # Individual icon components (Quality.tsx, Healthcare.tsx, etc.)
 src/icons/index.ts   # Auto-generated exports (updated by scripts)
-scripts/             # SVG conversion utilities (generate-icons-list.js, bulk-convert.js, convert-svg.js)
+scripts/             # SVG conversion utilities
+  utils.js           # Shared utilities (naming, attribute conversion)
+  generate-icons-list.js  # Auto-generates icons-list.txt from Figma exports
+  bulk-convert.js    # Batch converter using utils.js
+  convert-svg.js     # Single icon converter using utils.js
 temp-svgs/           # Drop zone for Figma SVG exports (gitignored)
 .github/             # GitHub configuration and copilot instructions
 CONTRIBUTING.md      # Technical documentation for developers
@@ -78,6 +88,11 @@ README.md            # User-facing documentation
 **Index file management:** The `scripts/bulk-convert.js` auto-updates `src/icons/index.ts` with alphabetically sorted exports.
 
 **Important:** `temp-svgs/` is gitignored to keep development files out of version control.
+
+**Shared utilities:** All conversion scripts use `scripts/utils.js` for consistent naming and attribute conversion. This ensures a single source of truth for:
+- SVG attribute kebab-case → camelCase conversion
+- Figma name → PascalCase component name conversion
+- Description generation
 
 ## Design System Constants
 
@@ -101,3 +116,84 @@ README.md            # User-facing documentation
 3. **Update** `src/icons/index.ts` with new exports (bulk-convert does this automatically)
 4. **Validate** the icon displays correctly at different sizes (24px, 50px, 100px)
 5. **Test** color prop overrides work: `<IconSVG fill="#FF0000" stroke="#0000FF" />`
+
+## Coding Standards
+
+### Documentation
+
+**All documentation MUST be in English.**
+
+**JavaScript files:** Use JSDoc standard with type definitions
+```javascript
+/**
+ * Convert kebab-case SVG attributes to camelCase for React
+ * @param {string} svg - SVG content string
+ * @returns {string} SVG with camelCase attributes
+ */
+function convertAttributesToCamelCase(svg) {
+  // implementation
+}
+```
+
+**TypeScript files:** Use TSDoc with proper type annotations
+```typescript
+/**
+ * Quality icon component
+ * Represents quality and excellence
+ */
+export default function QualitySVG(props: React.ComponentProps<"svg">) {
+  // implementation
+}
+```
+
+### Naming Conventions
+
+**Files:**
+- React components: `PascalCase.tsx` (e.g., `Quality.tsx`, `Healthcare.tsx`)
+- Utility scripts: `kebab-case.js` (e.g., `convert-svg.js`, `bulk-convert.js`)
+- Shared utilities: `camelCase.js` (e.g., `utils.js`)
+
+**Variables and Functions:**
+- Variables: `camelCase` (e.g., `iconName`, `svgContent`, `defaultSize`)
+- Functions: `camelCase` (e.g., `convertToComponentName`, `generateDescription`)
+- Constants: `UPPER_SNAKE_CASE` or `camelCase` for config (e.g., `DEFAULT_FILL`, `tempSvgsDir`)
+- React Components: `PascalCase` (e.g., `QualitySVG`, `HealthcareSVG`)
+
+**Function Parameters:**
+- Use descriptive `camelCase` names (e.g., `svgPath`, `componentName`, `description`)
+- Always document types in JSDoc for JavaScript files
+
+**Examples:**
+```javascript
+// Good
+const svgContent = fs.readFileSync(svgPath, 'utf-8');
+const componentName = convertToComponentName(name);
+function generateDescription(iconName) { /* ... */ }
+
+// Bad
+const svg_content = fs.readFileSync(svg_path, 'utf-8');
+const ComponentName = convert_to_component_name(name);
+function GenerateDescription(icon_name) { /* ... */ }
+```
+
+### Code Style
+
+**JavaScript/Node.js scripts:**
+- Use `const` and `let`, never `var`
+- Single quotes for strings: `'hello'` not `"hello"`
+- Template literals for interpolation: `` `${name} icon` ``
+- Semicolons required
+- 2-space indentation
+- Use `require()` for imports (CommonJS)
+
+**TypeScript components:**
+- Use `import` statements (ES Modules)
+- Proper type annotations for all props
+- No `any` types - use specific types
+- Double quotes for JSX attributes
+- Template literals for dynamic content
+
+**Comments:**
+- Use JSDoc for all exported functions
+- Inline comments for complex logic
+- Keep comments concise and in English

@@ -25,6 +25,7 @@ silver-icons/
 │   ├── index.mjs           # ES Modules
 │   └── index.d.ts          # TypeScript definitions
 ├── scripts/
+│   ├── utils.js                # Shared utilities (naming, attribute conversion)
 │   ├── generate-icons-list.js  # Auto-generates icons-list.txt
 │   ├── bulk-convert.js         # Converts SVG → React components
 │   └── convert-svg.js          # Single SVG converter
@@ -171,13 +172,32 @@ npm run build
 
 ## Conversion Scripts
 
+All conversion scripts share common utilities from `scripts/utils.js` to ensure consistency and maintainability.
+
+### `scripts/utils.js`
+
+Shared utilities used by all conversion scripts:
+
+**Functions:**
+- `convertAttributesToCamelCase(svg)` - Converts kebab-case SVG attributes to camelCase for React
+- `convertToComponentName(name)` - Converts Figma names to PascalCase component names
+- `generateDescription(name)` - Generates human-readable descriptions from icon names
+- `generateDescriptionFromComponentName(componentName)` - Generates descriptions from component names
+
+**Supported attribute conversions:**
+- `clip-path` → `clipPath`, `clip-rule` → `clipRule`
+- `fill-opacity` → `fillOpacity`, `fill-rule` → `fillRule`
+- `stroke-*` attributes (width, dasharray, linecap, etc.)
+- Font and text attributes (font-family, text-anchor, etc.)
+- Gradient attributes (stop-color, stop-opacity)
+
 ### `scripts/generate-icons-list.js`
 
 Auto-generates `temp-svgs/icons-list.txt` from SVG files in `temp-svgs/` folder.
 
 **Logic:**
 - Detects naming pattern (Alt= or Solid Icons=)
-- Converts to PascalCase component name
+- Uses `convertToComponentName()` for PascalCase conversion
 - Handles special characters and number prefixing
 - Outputs: `filename.svg|ComponentName|Auto-generated from {filename}`
 
@@ -188,6 +208,7 @@ Converts all SVGs listed in `icons-list.txt` to React components.
 **Transformations:**
 - Replaces `fill="#E3F7FB"` → `fill={fill}`
 - Replaces `stroke="#3F3F3F"` → `stroke={stroke}`
+- Uses `convertAttributesToCamelCase()` for all SVG attributes
 - Converts style attributes: `style="mix-blend-mode:multiply"` → `style={{ mixBlendMode: "multiply" }}`
 - Detects viewBox size (50x50 vs 100x100) for default width/height
 - Auto-updates `src/icons/index.ts` with alphabetically sorted exports
@@ -200,6 +221,8 @@ Converts a single SVG file.
 ```bash
 npm run convert-svg <svg-file> <ComponentName>
 ```
+
+**Transformations:** Same as bulk-convert.js, uses shared utilities from utils.js
 
 ## Testing Icons Locally
 
@@ -287,6 +310,231 @@ If you see warnings about package.json exports, ensure `types` comes before `imp
   }
 }
 ```
+
+## Coding Standards
+
+### Documentation
+
+**All documentation MUST be in English.**
+
+#### JavaScript Files
+
+Use JSDoc standard with type definitions for all exported functions:
+
+```javascript
+/**
+ * Convert kebab-case SVG attributes to camelCase for React
+ * @param {string} svg - SVG content string
+ * @returns {string} SVG with camelCase attributes
+ */
+function convertAttributesToCamelCase(svg) {
+  // Map of SVG attributes that need to be converted
+  const attributeMap = { /* ... */ };
+  // implementation
+}
+
+/**
+ * Convert Figma name to PascalCase component name
+ * @param {string} name - Original name from Figma
+ * @returns {string} PascalCase component name
+ */
+function convertToComponentName(name) {
+  // implementation
+}
+```
+
+**Required JSDoc tags:**
+- `@param {type} name - description` for all parameters
+- `@returns {type} description` for return values
+- Description of what the function does
+
+#### TypeScript Files
+
+Use TSDoc comments for React components:
+
+```typescript
+/**
+ * Quality icon component
+ * Represents quality and excellence in SilverAssist services
+ */
+export default function QualitySVG(props: React.ComponentProps<"svg">) {
+  const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
+  return (
+    <svg width={width} height={height} {...props}>
+      {/* SVG content */}
+    </svg>
+  );
+}
+```
+
+### Naming Conventions
+
+#### Files
+
+- **React components:** `PascalCase.tsx`
+  - Examples: `Quality.tsx`, `Healthcare.tsx`, `BridgeLoan.tsx`
+- **Utility scripts:** `kebab-case.js`
+  - Examples: `convert-svg.js`, `bulk-convert.js`, `generate-icons-list.js`
+- **Shared utilities:** `camelCase.js`
+  - Examples: `utils.js`
+- **Config files:** `kebab-case` or `camelCase`
+  - Examples: `tsup.config.ts`, `package.json`
+
+#### Variables and Functions
+
+- **Variables:** `camelCase`
+  ```javascript
+  const svgContent = fs.readFileSync(svgPath, 'utf-8');
+  const iconName = 'Quality';
+  const defaultSize = 100;
+  ```
+
+- **Functions:** `camelCase`
+  ```javascript
+  function convertToComponentName(name) { /* ... */ }
+  function generateDescription(iconName) { /* ... */ }
+  function updateIndexFile(newIcons) { /* ... */ }
+  ```
+
+- **Constants:** `UPPER_SNAKE_CASE` or `camelCase` for paths
+  ```javascript
+  const DEFAULT_FILL = '#E3F7FB';
+  const DEFAULT_STROKE = '#3F3F3F';
+  const tempSvgsDir = path.join(__dirname, '../temp-svgs');
+  ```
+
+- **React Components:** `PascalCase` with `SVG` suffix
+  ```typescript
+  export default function QualitySVG(props) { /* ... */ }
+  export default function HealthcareSVG(props) { /* ... */ }
+  ```
+
+#### Function Parameters
+
+- Use descriptive `camelCase` names
+- Always document types in JSDoc for JavaScript
+
+```javascript
+/**
+ * @param {string} svgPath - Absolute path to SVG file
+ * @param {string} componentName - PascalCase component name
+ * @param {string} description - Human-readable description
+ */
+function convertSvgToComponent(svgPath, componentName, description) {
+  // implementation
+}
+```
+
+### Code Style
+
+#### JavaScript/Node.js Scripts
+
+```javascript
+// Good ✓
+const svgContent = fs.readFileSync(svgPath, 'utf-8');
+const componentName = convertToComponentName(name);
+const description = `${name} icon`;
+
+if (isValid) {
+  processIcon(svgContent);
+}
+
+// Bad ✗
+var svg_content = fs.readFileSync(svg_path, "utf-8");  // var, snake_case, double quotes
+const ComponentName = convert_to_component_name(name);  // PascalCase for variable
+const description = name + " icon";  // string concatenation instead of template literal
+
+if(isValid){  // missing spaces
+  processIcon(svgContent)
+}  // missing semicolon
+```
+
+**Rules:**
+- Use `const` and `let`, never `var`
+- Single quotes for strings: `'hello'` not `"hello"`
+- Template literals for interpolation: `` `${name} icon` ``
+- Semicolons required at end of statements
+- 2-space indentation (no tabs)
+- Use `require()` for imports (CommonJS)
+- Spaces around operators and keywords
+- No trailing whitespace
+
+#### TypeScript Components
+
+```typescript
+// Good ✓
+import React from 'react';
+
+export default function QualitySVG(props: React.ComponentProps<"svg">) {
+  const { width = 100, height = 100, fill = "#E3F7FB" } = props;
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 100 100"
+    >
+      <path fill={fill} d="M..." />
+    </svg>
+  );
+}
+
+// Bad ✗
+import React from "react";  // double quotes for imports
+
+export default function QualitySVG(props: any) {  // any type
+  const { width = 100, height = 100, fill = '#E3F7FB' } = props;  // single quotes in JSX context
+  return <svg width={width} height={height} viewBox='0 0 100 100'>  // single quotes for JSX
+    <path fill={fill} d='M...' />  // inconsistent quotes
+  </svg>
+}
+```
+
+**Rules:**
+- Use `import` statements (ES Modules)
+- Proper type annotations for all props
+- No `any` types - use specific types or `React.ComponentProps<>`
+- Double quotes for JSX attributes
+- Single quotes for imports
+- Template literals for dynamic content
+- Destructure props for clarity
+
+#### Comments
+
+```javascript
+// Good ✓
+/**
+ * Convert Figma naming to React component name
+ * Handles special characters and number prefixes
+ */
+function convertToComponentName(name) {
+  // Replace & with And for valid JavaScript identifiers
+  let componentName = name.replace(/\s*&\s*/g, ' And ');
+  
+  // Prefix with "Icon" if name starts with number
+  if (/^\d/.test(componentName)) {
+    componentName = 'Icon' + componentName;
+  }
+  
+  return componentName;
+}
+
+// Bad ✗
+// converts name
+function convertToComponentName(name) {  // missing JSDoc
+  let componentName = name.replace(/\s*&\s*/g, ' And ');  // no explanation why
+  if (/^\d/.test(componentName)) {
+    componentName = 'Icon' + componentName;  // what does this do?
+  }
+  return componentName;
+}
+```
+
+**Rules:**
+- Use JSDoc for all exported functions
+- Inline comments for complex logic
+- Explain *why*, not *what* (code should be self-explanatory)
+- Keep comments concise and in English
+- Update comments when code changes
 
 ## License
 

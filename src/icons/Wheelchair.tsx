@@ -15,7 +15,7 @@ export default function WheelchairSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_2028)">
+      <g clipPath="url(#clip0_128_2028)">
       <path d="M33.36 69.77L28.69 67.06C27.38 69.95 27.38 73.26 28.69 76.14L33.36 73.43C32.92 72.25 32.92 70.95 33.36 69.77Z" fill="white"/>
       <path d="M34.39 75.22L29.72 77.93C31.54 80.52 34.4 82.18 37.55 82.48V77.07C36.32 76.83 35.21 76.18 34.4 75.23L34.39 75.22Z" fill="white"/>
       <path d="M37.55 66.14V60.73C34.4 61.03 31.55 62.7 29.72 65.28L34.39 67.99C35.2 67.04 36.31 66.39 37.54 66.14H37.55Z" fill="white"/>

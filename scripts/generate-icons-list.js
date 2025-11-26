@@ -10,6 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { convertToComponentName, generateDescription } = require('./utils');
 
 const tempSvgsDir = path.join(__dirname, '../temp-svgs');
 const outputFile = path.join(tempSvgsDir, 'icons-list.txt');
@@ -90,40 +91,3 @@ console.log(`  Large icons: ${largeIcons.length}`);
 console.log(`  Small icons: ${smallIcons.length}`);
 console.log(`  Total: ${largeIcons.length + smallIcons.length}\n`);
 console.log('Next step: npm run bulk-convert');
-
-/**
- * Convert Figma name to PascalCase component name
- */
-function convertToComponentName(name) {
-  let componentName = name
-    // Replace & with And
-    .replace(/\s*&\s*/g, ' And ')
-    // Remove ? and other special chars
-    .replace(/[?]/g, '')
-    // Split by spaces, hyphens, or other separators
-    .split(/[\s\-_]+/)
-    // Capitalize each word
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    // Join together
-    .join('')
-    // Handle numbers (keep them as-is)
-    .replace(/(\d+)/g, '$1');
-  
-  // If name starts with a number, prefix with "Icon"
-  if (/^\d/.test(componentName)) {
-    componentName = 'Icon' + componentName;
-  }
-  
-  return componentName;
-}
-
-/**
- * Generate a description from the icon name
- */
-function generateDescription(name) {
-  // Clean up the name for description
-  return name
-    .replace(/&/g, 'and')
-    .replace(/\?/g, '')
-    .trim();
-}

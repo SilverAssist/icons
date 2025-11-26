@@ -15,7 +15,7 @@ export default function ReligiousActivitiesSVG(props: React.ComponentProps<"svg"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_157)">
+      <g clipPath="url(#clip0_128_157)">
       <path d="M66.436 58.0952H55.5807L50.1211 67.4224L55.5807 76.7496H66.436L71.8972 67.4224L66.436 58.0952Z" fill={fill}/>
       <path d="M52.4749 58.0952H44.6597L48.5673 64.7693L52.4749 58.0952Z" fill={fill}/>
       <path d="M61.0083 86.0204L64.8823 79.4026H57.1343L61.0083 86.0204Z" fill={fill}/>

@@ -15,7 +15,7 @@ export default function SocialOutingsSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_366)">
+      <g clipPath="url(#clip0_128_366)">
       <path d="M21.8908 60.3859C19.5027 60.3859 17.5671 62.3006 17.5671 64.6661C17.5671 67.0316 19.5012 68.9463 21.8908 68.9463C24.2803 68.9463 26.2144 67.0213 26.2144 64.6661C26.2144 62.3021 24.2803 60.3859 21.8908 60.3859Z" fill="white"/>
       <path d="M43.1763 30.0537H27.0908V45.3488H43.1763V30.0537Z" fill="white"/>
       <path d="M24.0077 30.0537H10.5829C8.65775 30.0537 7.08471 31.6005 7.08471 33.5167H7.07422V45.3488H24.0062V30.0537H24.0077Z" fill="white"/>

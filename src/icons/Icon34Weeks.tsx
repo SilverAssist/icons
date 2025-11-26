@@ -15,7 +15,7 @@ export default function Icon34WeeksSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_1484)">
+      <g clipPath="url(#clip0_128_1484)">
       <path d="M34.13 29.31H44.44H54.76H65.07H75.39H85.14V18H15V29.31H23.81H34.13Z" fill="white"/>
       <path d="M42.94 32.31H35.63V39.62H42.94V32.31Z" fill="white"/>
       <path d="M53.2499 32.31H45.9399V39.62H53.2499V32.31Z" fill="white"/>

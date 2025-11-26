@@ -15,7 +15,7 @@ export default function Icon512MoSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_1597)">
+      <g clipPath="url(#clip0_128_1597)">
       <path d="M21.94 24.45H8V32.87H21.94V24.45Z" fill={fill}/>
       <path d="M21.94 18H8V21.45H21.94V18Z" fill="white"/>
       <path d="M45.18 24.45H31.24V32.87H45.18V24.45Z" fill={fill}/>

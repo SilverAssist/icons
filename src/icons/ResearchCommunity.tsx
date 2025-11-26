@@ -15,7 +15,7 @@ export default function ResearchCommunitySVG(props: React.ComponentProps<"svg">)
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_1184)">
+      <g clipPath="url(#clip0_128_1184)">
       <path d="M68.3408 48.4742L50.5 38.3087L32.6609 48.4742H36.5316V65.6351H40.6023V51.2348V48.6097H43.257H49.0324H49.313H51.6887H51.9677H57.7431H60.3994V51.2348V65.6351H64.4685V48.4742H68.3408Z" fill="white"/>
       <path d="M57.743 51.2348H51.9675V65.6351H57.743V51.2348Z" fill={fill}/>
       <path d="M49.0323 51.2348H43.2568V65.6351H49.0323V51.2348Z" fill={fill}/>

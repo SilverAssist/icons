@@ -15,7 +15,7 @@ export default function FranchiseSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_1944)">
+      <g clipPath="url(#clip0_128_1944)">
       <path d="M42.2886 19.8475H34.8357L30.8242 31.9937H41.3174L42.2886 19.8475Z" fill="white"/>
       <path d="M45.0332 19.8475L44.062 31.9937H54.6924L53.7212 19.8475H45.0332Z" fill={fill}/>
       <path d="M31.9537 19.8475H26.0104L18.8425 31.9937H27.9422L31.9537 19.8475Z" fill={fill}/>

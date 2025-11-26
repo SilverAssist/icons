@@ -18,6 +18,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { convertAttributesToCamelCase, generateDescriptionFromComponentName } = require('./utils');
 
 // Get command line arguments
 const args = process.argv.slice(2);
@@ -54,6 +55,9 @@ innerSvg = innerSvg.replace(/fill="#E3F7FB"/gi, 'fill={fill}');
 // Replace stroke="#3F3F3F" with {stroke}
 innerSvg = innerSvg.replace(/stroke="#3F3F3F"/gi, 'stroke={stroke}');
 
+// Convert kebab-case attributes to camelCase for React
+innerSvg = convertAttributesToCamelCase(innerSvg);
+
 // Indent the SVG content
 const indentedSvg = innerSvg.split('\n').map(line => '      ' + line).join('\n');
 
@@ -62,7 +66,7 @@ const componentTemplate = `import React from 'react';
 
 /**
  * ${iconName} icon component
- * ${generateDescription(iconName)}
+ * ${generateDescriptionFromComponentName(iconName)}
  */
 export default function ${iconName}SVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
@@ -88,12 +92,10 @@ console.log(`✓ Created ${iconName}.tsx`);
 // Update index.ts
 updateIndexFile(iconName);
 
-function generateDescription(name) {
-  // Convert PascalCase to readable description
-  const words = name.replace(/([A-Z])/g, ' $1').trim();
-  return `${words} icon`;
-}
-
+/**
+ * Update the index.ts file with a new icon export
+ * @param {string} newIcon - Component name to add to exports
+ */
 function updateIndexFile(newIcon) {
   const indexPath = path.join(__dirname, '../src/icons/index.ts');
   let indexContent = fs.readFileSync(indexPath, 'utf-8');

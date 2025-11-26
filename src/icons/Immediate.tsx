@@ -15,7 +15,7 @@ export default function ImmediateSVG(props: React.ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_128_1451)">
+      <g clipPath="url(#clip0_128_1451)">
       <path d="M50.01 24.42C51.49 24.42 52.94 24.53 54.37 24.73V20.86H45.65V24.73C47.08 24.53 48.53 24.42 50.01 24.42Z" fill="white"/>
       <path d="M75.6 37.37L77.91 35.06L71.74 28.89L69.5 31.13C71.8 32.92 73.86 35.02 75.6 37.36V37.37Z" fill="white"/>
       <path d="M30.35 31.27L27.97 28.89L25.04 31.82L22.11 34.75L24.55 37.19C26.22 34.97 28.17 32.98 30.35 31.27Z" fill="white"/>

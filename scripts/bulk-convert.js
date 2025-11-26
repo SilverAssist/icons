@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { convertAttributesToCamelCase } = require('./utils');
 
 const tempSvgsDir = path.join(__dirname, '../temp-svgs');
 const iconsListPath = path.join(tempSvgsDir, 'icons-list.txt');
@@ -77,6 +78,13 @@ if (successCount > 0) {
   console.log('3. Test your icons!');
 }
 
+/**
+ * Convert a single SVG file to a React component
+ * @param {string} svgPath - Absolute path to the SVG file
+ * @param {string} componentName - PascalCase component name
+ * @param {string} description - Human-readable description of the icon
+ * @throws {Error} If SVG format is invalid
+ */
 function convertSvgToComponent(svgPath, componentName, description) {
   const svgContent = fs.readFileSync(svgPath, 'utf-8');
   
@@ -100,6 +108,9 @@ function convertSvgToComponent(svgPath, componentName, description) {
   // Replace other common color variations if they match the defaults
   innerSvg = innerSvg.replace(/fill="#e3f7fb"/gi, 'fill={fill}');
   innerSvg = innerSvg.replace(/stroke="#3f3f3f"/gi, 'stroke={stroke}');
+  
+  // Convert kebab-case attributes to camelCase for React
+  innerSvg = convertAttributesToCamelCase(innerSvg);
   
   // Fix inline style attributes (convert to JSX object notation)
   innerSvg = innerSvg.replace(/style="([^"]+)"/gi, (match, styleContent) => {
@@ -147,6 +158,11 @@ ${indentedSvg}
   fs.writeFileSync(outputPath, componentTemplate, 'utf-8');
 }
 
+/**
+ * Update the index.ts file with new icon exports
+ * Reads existing exports, adds new ones, sorts alphabetically
+ * @param {string[]} newIcons - Array of component names to add
+ */
 function updateIndexFile(newIcons) {
   const indexPath = path.join(outputDir, 'index.ts');
   
