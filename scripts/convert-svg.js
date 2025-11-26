@@ -2,61 +2,61 @@
 
 /**
  * SVG to React Component Converter
- * 
+ *
  * This script converts SVG files from Figma into React components
  * following the Silver Icons format.
- * 
+ *
  * Usage:
  *   1. Export your icon as SVG from Figma
  *   2. Place the SVG file in the 'temp-svgs/' folder
  *   3. Run: npm run convert-svg <filename.svg> <IconName>
  *   4. The component will be created in src/icons/
- * 
+ *
  * Example:
  *   npm run convert-svg quality.svg Quality
  */
 
-const fs = require('fs');
-const path = require('path');
-const { 
-  convertAttributesToCamelCase, 
-  generateDescriptionFromComponentName, 
+const fs = require("fs");
+const path = require("path");
+const {
+  convertAttributesToCamelCase,
+  generateDescriptionFromComponentName,
   generateComponentTemplate,
   getViewBox,
   getDefaultSize,
   replaceColorsWithProps,
   convertStylesToJSX,
   indentSvgContent,
-  extractSvgInnerContent
-} = require('./utils');
+  extractSvgInnerContent,
+} = require("./utils");
 
 // Get command line arguments
 const args = process.argv.slice(2);
 if (args.length < 2) {
-  console.error('Usage: node convert-svg.js <svg-file> <IconName>');
-  console.error('Example: node convert-svg.js quality.svg Quality');
+  console.error("Usage: node convert-svg.js <svg-file> <IconName>");
+  console.error("Example: node convert-svg.js quality.svg Quality");
   process.exit(1);
 }
 
 const [svgFile, iconName] = args;
-const svgPath = path.join(__dirname, '../temp-svgs', svgFile);
-const outputPath = path.join(__dirname, '../src/icons', `${iconName}.tsx`);
+const svgPath = path.join(__dirname, "../temp-svgs", svgFile);
+const outputPath = path.join(__dirname, "../src/icons", `${iconName}.tsx`);
 
 // Read SVG file
 if (!fs.existsSync(svgPath)) {
   console.error(`Error: SVG file not found: ${svgPath}`);
-  console.error('Make sure to place your SVG in the temp-svgs/ folder');
+  console.error("Make sure to place your SVG in the temp-svgs/ folder");
   process.exit(1);
 }
 
-const svgContent = fs.readFileSync(svgPath, 'utf-8');
+const svgContent = fs.readFileSync(svgPath, "utf-8");
 
 // Extract SVG inner content
 let innerSvg;
 try {
   innerSvg = extractSvgInnerContent(svgContent);
-} catch (error) {
-  console.error('Error: Invalid SVG file');
+} catch {
+  console.error("Error: Invalid SVG file");
   process.exit(1);
 }
 
@@ -86,10 +86,20 @@ const componentTemplate = generateComponentTemplate(
 );
 
 // Write component file
-fs.writeFileSync(outputPath, componentTemplate, 'utf-8');
+fs.writeFileSync(outputPath, componentTemplate, "utf-8");
 console.log(`✓ Created ${iconName}.tsx`);
 
-console.log('\nNext steps:');
-console.log('1. Review the generated component');
-console.log('2. Run: npm run build');
-console.log('3. Test the icon in your app');
+// Format with Prettier
+const { execSync } = require("child_process");
+try {
+  console.log("\n🎨 Formatting with Prettier...");
+  execSync(`npx prettier --write "${outputPath}"`, { stdio: "inherit" });
+  console.log("✓ File formatted");
+} catch {
+  console.warn("⚠ Prettier formatting failed, but file was created");
+}
+
+console.log("\nNext steps:");
+console.log("1. Review the generated component");
+console.log("2. Run: npm run build");
+console.log("3. Test the icon in your app");

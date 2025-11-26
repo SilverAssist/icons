@@ -10,35 +10,35 @@
 function convertAttributesToCamelCase(svg) {
   // Map of SVG attributes that need to be converted from kebab-case to camelCase
   const attributeMap = {
-    'clip-path': 'clipPath',
-    'clip-rule': 'clipRule',
-    'fill-opacity': 'fillOpacity',
-    'fill-rule': 'fillRule',
-    'stroke-dasharray': 'strokeDasharray',
-    'stroke-dashoffset': 'strokeDashoffset',
-    'stroke-linecap': 'strokeLinecap',
-    'stroke-linejoin': 'strokeLinejoin',
-    'stroke-miterlimit': 'strokeMiterlimit',
-    'stroke-opacity': 'strokeOpacity',
-    'stroke-width': 'strokeWidth',
-    'text-anchor': 'textAnchor',
-    'text-decoration': 'textDecoration',
-    'font-family': 'fontFamily',
-    'font-size': 'fontSize',
-    'font-style': 'fontStyle',
-    'font-weight': 'fontWeight',
-    'stop-color': 'stopColor',
-    'stop-opacity': 'stopOpacity',
+    "clip-path": "clipPath",
+    "clip-rule": "clipRule",
+    "fill-opacity": "fillOpacity",
+    "fill-rule": "fillRule",
+    "stroke-dasharray": "strokeDasharray",
+    "stroke-dashoffset": "strokeDashoffset",
+    "stroke-linecap": "strokeLinecap",
+    "stroke-linejoin": "strokeLinejoin",
+    "stroke-miterlimit": "strokeMiterlimit",
+    "stroke-opacity": "strokeOpacity",
+    "stroke-width": "strokeWidth",
+    "text-anchor": "textAnchor",
+    "text-decoration": "textDecoration",
+    "font-family": "fontFamily",
+    "font-size": "fontSize",
+    "font-style": "fontStyle",
+    "font-weight": "fontWeight",
+    "stop-color": "stopColor",
+    "stop-opacity": "stopOpacity",
   };
-  
+
   let result = svg;
-  
+
   // Replace each kebab-case attribute with its camelCase equivalent
   for (const [kebab, camel] of Object.entries(attributeMap)) {
-    const regex = new RegExp(kebab, 'g');
+    const regex = new RegExp(kebab, "g");
     result = result.replace(regex, camel);
   }
-  
+
   return result;
 }
 
@@ -50,23 +50,23 @@ function convertAttributesToCamelCase(svg) {
 function convertToComponentName(name) {
   let componentName = name
     // Replace & with And
-    .replace(/\s*&\s*/g, ' And ')
+    .replace(/\s*&\s*/g, " And ")
     // Remove ? and other special chars
-    .replace(/[?]/g, '')
+    .replace(/[?]/g, "")
     // Split by spaces, hyphens, or other separators
     .split(/[\s\-_]+/)
     // Capitalize each word
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     // Join together
-    .join('')
+    .join("")
     // Handle numbers (keep them as-is)
-    .replace(/(\d+)/g, '$1');
-  
+    .replace(/(\d+)/g, "$1");
+
   // If name starts with a number, prefix with "Icon"
   if (/^\d/.test(componentName)) {
-    componentName = 'Icon' + componentName;
+    componentName = "Icon" + componentName;
   }
-  
+
   return componentName;
 }
 
@@ -77,10 +77,7 @@ function convertToComponentName(name) {
  */
 function generateDescription(name) {
   // Clean up the name for description
-  return name
-    .replace(/&/g, 'and')
-    .replace(/\?/g, '')
-    .trim();
+  return name.replace(/&/g, "and").replace(/\?/g, "").trim();
 }
 
 /**
@@ -90,7 +87,7 @@ function generateDescription(name) {
  */
 function generateDescriptionFromComponentName(componentName) {
   // Convert PascalCase to readable description
-  const words = componentName.replace(/([A-Z])/g, ' $1').trim();
+  const words = componentName.replace(/([A-Z])/g, " $1").trim();
   return `${words} icon`;
 }
 
@@ -109,7 +106,7 @@ function isSmallIcon(svgContent) {
  * @returns {string} ViewBox value ('0 0 50 50' or '0 0 100 100')
  */
 function getViewBox(svgContent) {
-  return isSmallIcon(svgContent) ? '0 0 50 50' : '0 0 100 100';
+  return isSmallIcon(svgContent) ? "0 0 50 50" : "0 0 100 100";
 }
 
 /**
@@ -129,15 +126,20 @@ function getDefaultSize(svgContent) {
  */
 function replaceColorsWithProps(svg) {
   let result = svg;
-  
+
   // Replace fill colors (case-insensitive)
-  result = result.replace(/fill="#E3F7FB"/gi, 'fill={fill}');
-  result = result.replace(/fill="#e3f7fb"/gi, 'fill={fill}');
-  
-  // Replace stroke colors (case-insensitive)
-  result = result.replace(/stroke="#3F3F3F"/gi, 'stroke={stroke}');
-  result = result.replace(/stroke="#3f3f3f"/gi, 'stroke={stroke}');
-  
+  result = result.replace(/fill="#E3F7FB"/gi, "fill={fill}");
+  result = result.replace(/fill="#e3f7fb"/gi, "fill={fill}");
+
+  // Replace stroke colors when used as stroke attribute (case-insensitive)
+  result = result.replace(/stroke="#3F3F3F"/gi, "stroke={stroke}");
+  result = result.replace(/stroke="#3f3f3f"/gi, "stroke={stroke}");
+
+  // Replace stroke color when used as fill attribute (case-insensitive)
+  // This handles cases where the stroke color (#3F3F3F) is used in fill
+  result = result.replace(/fill="#3F3F3F"/gi, "fill={stroke}");
+  result = result.replace(/fill="#3f3f3f"/gi, "fill={stroke}");
+
   return result;
 }
 
@@ -150,14 +152,15 @@ function replaceColorsWithProps(svg) {
 function convertStylesToJSX(svg) {
   return svg.replace(/style="([^"]+)"/gi, (match, styleContent) => {
     // Convert CSS string to React style object
-    const styleObj = styleContent.split(';')
-      .filter(s => s.trim())
-      .map(s => {
-        const [prop, value] = s.split(':').map(x => x.trim());
+    const styleObj = styleContent
+      .split(";")
+      .filter((s) => s.trim())
+      .map((s) => {
+        const [prop, value] = s.split(":").map((x) => x.trim());
         const camelProp = prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
         return `${camelProp}: "${value}"`;
       })
-      .join(', ');
+      .join(", ");
     return `style={{ ${styleObj} }}`;
   });
 }
@@ -169,10 +172,11 @@ function convertStylesToJSX(svg) {
  * @returns {string} Indented SVG content
  */
 function indentSvgContent(svg, spaces = 6) {
-  const indent = ' '.repeat(spaces);
-  return svg.split('\n')
-    .map(line => line.trim() ? indent + line : '')
-    .join('\n');
+  const indent = " ".repeat(spaces);
+  return svg
+    .split("\n")
+    .map((line) => (line.trim() ? indent + line : ""))
+    .join("\n");
 }
 
 /**
@@ -184,7 +188,7 @@ function indentSvgContent(svg, spaces = 6) {
 function extractSvgInnerContent(svgContent) {
   const svgMatch = svgContent.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
   if (!svgMatch) {
-    throw new Error('Invalid SVG format');
+    throw new Error("Invalid SVG format");
   }
   return svgMatch[1].trim();
 }
@@ -198,7 +202,13 @@ function extractSvgInnerContent(svgContent) {
  * @param {string} viewBox - ViewBox attribute value
  * @returns {string} Complete React component code
  */
-function generateComponentTemplate(componentName, description, innerSvg, defaultSize = 100, viewBox = '0 0 100 100') {
+function generateComponentTemplate(
+  componentName,
+  description,
+  innerSvg,
+  defaultSize = 100,
+  viewBox = "0 0 100 100"
+) {
   return `import React from 'react';
 
 /**

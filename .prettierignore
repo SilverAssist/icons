@@ -1,0 +1,11 @@
+# Ignore artifacts:
+dist
+node_modules
+
+# Ignore config files
+package-lock.json
+tsconfig.json
+.prettierrc.json
+
+# Ignore markdown files
+*.md
