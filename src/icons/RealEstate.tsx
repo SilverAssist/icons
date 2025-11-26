@@ -2,10 +2,10 @@ import React from "react";
 
 /**
  * RealEstate icon component
- * Real Estate
+ * Real Estate icon
  */
 export default function RealEstateSVG(props: React.ComponentProps<"svg">) {
-  const { width = 50, height = 50, fill = "#FFFFFF", stroke = "#3F3F3F" } = props;
+  const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg
       width={width}
@@ -16,10 +16,10 @@ export default function RealEstateSVG(props: React.ComponentProps<"svg">) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g clipPath="url(#clip0_133_40)">
-        <path d="M41.4547 16.9537H18.486V34.1694H41.4547V16.9537Z" fill="#003073" />
+        <path d="M41.4547 16.9537H18.486V34.1694H41.4547V16.9537Z" fill={fill} />
         <path
           d="M14.9519 10.0651V4.99988H11.0096V10.0651H5V13.9742H11.0096V44.6633H14.9519V13.9742H45V10.0651H14.9519Z"
-          fill="#003073"
+          fill={fill}
         />
       </g>
       <defs>

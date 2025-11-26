@@ -22,6 +22,7 @@ const {
   indentSvgContent,
   extractSvgInnerContent,
   updateIndexFile,
+  usesStroke,
 } = require("./utils");
 
 const tempSvgsDir = path.join(__dirname, "../temp-svgs");
@@ -116,6 +117,7 @@ function convertSvgToComponent(svgPath, componentName, description) {
   const viewBox = getViewBox(svgContent);
   const defaultSize = getDefaultSize(svgContent);
   const defaultFill = getDefaultFillColor(svgContent);
+  const includeStroke = usesStroke(svgContent);
 
   // Replace default colors with props
   innerSvg = replaceColorsWithProps(innerSvg);
@@ -136,7 +138,8 @@ function convertSvgToComponent(svgPath, componentName, description) {
     indentedSvg,
     defaultSize,
     viewBox,
-    defaultFill
+    defaultFill,
+    includeStroke
   );
 
   const outputPath = path.join(outputDir, `${componentName}.tsx`);

@@ -101,21 +101,41 @@ function isSmallIcon(svgContent) {
 }
 
 /**
- * Get the viewBox value based on icon size
+ * Get the viewBox value from SVG content
  * @param {string} svgContent - Complete SVG content string
- * @returns {string} ViewBox value ('0 0 50 50' or '0 0 100 100')
+ * @returns {string} ViewBox value extracted from SVG or default '0 0 100 100'
  */
 function getViewBox(svgContent) {
+  const viewBoxMatch = svgContent.match(/viewBox="([^"]+)"/);
+  if (viewBoxMatch) {
+    return viewBoxMatch[1];
+  }
   return isSmallIcon(svgContent) ? "0 0 50 50" : "0 0 100 100";
 }
 
 /**
- * Get the default size based on icon viewBox
+ * Get the default size based on icon size
  * @param {string} svgContent - Complete SVG content string
- * @returns {number} Default size (50 or 100)
+ * @returns {number} Default size extracted from width/height or based on viewBox
  */
 function getDefaultSize(svgContent) {
+  // Try to extract width from SVG
+  const widthMatch = svgContent.match(/width="(\d+)"/);
+  if (widthMatch) {
+    return parseInt(widthMatch[1], 10);
+  }
+
+  // Fallback to viewBox-based detection
   return isSmallIcon(svgContent) ? 50 : 100;
+}
+
+/**
+ * Detect if SVG uses small icon dark fill (#003073)
+ * @param {string} svg - SVG content string
+ * @returns {boolean} True if SVG uses fill="#003073"
+ */
+function usesSmallIconFill(svg) {
+  return /fill="#003073"/i.test(svg);
 }
 
 /**
@@ -127,16 +147,28 @@ function getDefaultSize(svgContent) {
 function usesWhiteFill(svg) {
   const hasWhite = /fill="white"/i.test(svg);
   const hasDefaultFill = /fill="#E3F7FB"/i.test(svg);
-  return hasWhite && !hasDefaultFill;
+  const hasSmallIconFill = usesSmallIconFill(svg);
+  return hasWhite && !hasDefaultFill && !hasSmallIconFill;
+}
+
+/**
+ * Detect if SVG uses stroke
+ * @param {string} svg - SVG content string
+ * @returns {boolean} True if SVG has stroke attribute
+ */
+function usesStroke(svg) {
+  return /stroke="#3F3F3F"/i.test(svg);
 }
 
 /**
  * Get the default fill color based on SVG content
  * @param {string} svg - SVG content string
- * @returns {string} Default fill color (#FFFFFF for white-only, #E3F7FB otherwise)
+ * @returns {string} Default fill color (#003073 for small icons, #FFFFFF for white-only, #E3F7FB otherwise)
  */
 function getDefaultFillColor(svg) {
-  return usesWhiteFill(svg) ? "#FFFFFF" : "#E3F7FB";
+  if (usesSmallIconFill(svg)) return "#003073";
+  if (usesWhiteFill(svg)) return "#FFFFFF";
+  return "#E3F7FB";
 }
 
 /**
@@ -152,7 +184,13 @@ function replaceColorsWithProps(svg) {
   result = result.replace(/fill="#E3F7FB"/gi, "fill={fill}");
   result = result.replace(/fill="#e3f7fb"/gi, "fill={fill}");
 
-  // Replace white fills (only if white is used in the SVG)
+  // Replace small icon fill color (#003073)
+  if (usesSmallIconFill(svg)) {
+    result = result.replace(/fill="#003073"/gi, "fill={fill}");
+    result = result.replace(/fill="#003073"/gi, "fill={fill}");
+  }
+
+  // Replace white fills (only if white is used in the SVG and not small icon)
   if (usesWhiteFill(svg)) {
     result = result.replace(/fill="white"/gi, "fill={fill}");
   }
@@ -226,7 +264,8 @@ function extractSvgInnerContent(svgContent) {
  * @param {string} innerSvg - SVG content (already processed, indented)
  * @param {number} defaultSize - Default width/height (50 or 100)
  * @param {string} viewBox - ViewBox attribute value
- * @param {string} defaultFill - Default fill color (defaults to #E3F7FB, or #FFFFFF for white icons)
+ * @param {string} defaultFill - Default fill color (defaults to #E3F7FB, or #FFFFFF for white icons, or #003073 for small icons)
+ * @param {boolean} includeStroke - Whether to include stroke prop (default: true, false for small icons with #003073)
  * @returns {string} Complete React component code
  */
 function generateComponentTemplate(
@@ -235,8 +274,23 @@ function generateComponentTemplate(
   innerSvg,
   defaultSize = 100,
   viewBox = "0 0 100 100",
-  defaultFill = "#E3F7FB"
+  defaultFill = "#E3F7FB",
+  includeStroke = true
 ) {
+  // Build destructuring based on whether stroke is needed
+  const destructuring = includeStroke
+    ? `const {
+    width = ${defaultSize},
+    height = ${defaultSize},
+    fill = "${defaultFill}",
+    stroke = "#3F3F3F",
+  } = props;`
+    : `const {
+    width = ${defaultSize},
+    height = ${defaultSize},
+    fill = "${defaultFill}",
+  } = props;`;
+
   return `import React from 'react';
 
 /**
@@ -244,12 +298,7 @@ function generateComponentTemplate(
  * ${description}
  */
 export default function ${componentName}SVG(props: React.ComponentProps<"svg">) {
-  const {
-    width = ${defaultSize},
-    height = ${defaultSize},
-    fill = "${defaultFill}",
-    stroke = "#3F3F3F",
-  } = props;
+  ${destructuring}
   return (
     <svg
       width={width}
@@ -340,5 +389,7 @@ module.exports = {
   isSmallIcon,
   replaceColorsWithProps,
   updateIndexFile,
+  usesSmallIconFill,
+  usesStroke,
   usesWhiteFill,
 };

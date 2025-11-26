@@ -30,6 +30,7 @@ const {
   convertStylesToJSX,
   indentSvgContent,
   extractSvgInnerContent,
+  usesStroke,
 } = require("./utils");
 
 // Get command line arguments
@@ -66,6 +67,7 @@ try {
 const viewBox = getViewBox(svgContent);
 const defaultSize = getDefaultSize(svgContent);
 const defaultFill = getDefaultFillColor(svgContent);
+const includeStroke = usesStroke(svgContent);
 
 // Replace default colors with props
 innerSvg = replaceColorsWithProps(innerSvg);
@@ -86,7 +88,8 @@ const componentTemplate = generateComponentTemplate(
   indentedSvg,
   defaultSize,
   viewBox,
-  defaultFill
+  defaultFill,
+  includeStroke
 );
 
 // Write component file

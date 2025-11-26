@@ -2,10 +2,10 @@ import React from "react";
 
 /**
  * LifeInsurance icon component
- * Life Insurance
+ * Life Insurance icon
  */
 export default function LifeInsuranceSVG(props: React.ComponentProps<"svg">) {
-  const { width = 100, height = 100, fill = "#FFFFFF", stroke = "#3F3F3F" } = props;
+  const { width = 100, height = 100, fill = "#003073" } = props;
   return (
     <svg
       width={width}
@@ -18,11 +18,11 @@ export default function LifeInsuranceSVG(props: React.ComponentProps<"svg">) {
       <g clipPath="url(#clip0_133_44)">
         <path
           d="M25.2546 19.3097C25.511 18.8595 25.9912 18.5813 26.5117 18.5813C27.0322 18.5813 27.5124 18.8595 27.7687 19.3097L29.9477 23.1411L36.1541 12.2258C36.4104 11.7756 36.8907 11.4975 37.4111 11.4975C37.9316 11.4975 38.4119 11.7756 38.6682 12.2258L44.7364 22.8977C46.9635 18.8151 46.3407 13.6052 42.8679 10.1546C38.6358 5.94945 31.7733 5.94945 27.5413 10.1546L26.0419 11.6444L24.5426 10.1546C20.3105 5.94945 13.4481 5.94945 9.21598 10.1546C5.63298 13.7121 5.08188 19.1411 7.56094 23.2749H22.9995L25.2538 19.3106L25.2546 19.3097Z"
-          fill="#003073"
+          fill={fill}
         />
         <path
           d="M31.203 26.762C30.9467 27.2122 30.4664 27.4904 29.9459 27.4904C29.4255 27.4904 28.9452 27.2122 28.6889 26.762L26.5099 22.9306L25.098 25.4139C24.8417 25.8641 24.3615 26.1423 23.841 26.1423H9.97786L26.0401 42.1023L42.8451 25.4043L37.4102 15.8468L31.2038 26.762H31.203Z"
-          fill="#003073"
+          fill={fill}
         />
       </g>
       <defs>
