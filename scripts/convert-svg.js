@@ -18,7 +18,17 @@
 
 const fs = require('fs');
 const path = require('path');
-const { convertAttributesToCamelCase, generateDescriptionFromComponentName } = require('./utils');
+const { 
+  convertAttributesToCamelCase, 
+  generateDescriptionFromComponentName, 
+  generateComponentTemplate,
+  getViewBox,
+  getDefaultSize,
+  replaceColorsWithProps,
+  convertStylesToJSX,
+  indentSvgContent,
+  extractSvgInnerContent
+} = require('./utils');
 
 // Get command line arguments
 const args = process.argv.slice(2);
@@ -41,81 +51,43 @@ if (!fs.existsSync(svgPath)) {
 
 const svgContent = fs.readFileSync(svgPath, 'utf-8');
 
-// Extract SVG inner content (everything between <svg> tags)
-const svgMatch = svgContent.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
-if (!svgMatch) {
+// Extract SVG inner content
+let innerSvg;
+try {
+  innerSvg = extractSvgInnerContent(svgContent);
+} catch (error) {
   console.error('Error: Invalid SVG file');
   process.exit(1);
 }
 
-let innerSvg = svgMatch[1].trim();
+// Detect icon size and get viewBox/defaultSize
+const viewBox = getViewBox(svgContent);
+const defaultSize = getDefaultSize(svgContent);
 
-// Replace fill="#E3F7FB" with {fill}
-innerSvg = innerSvg.replace(/fill="#E3F7FB"/gi, 'fill={fill}');
-// Replace stroke="#3F3F3F" with {stroke}
-innerSvg = innerSvg.replace(/stroke="#3F3F3F"/gi, 'stroke={stroke}');
+// Replace default colors with props
+innerSvg = replaceColorsWithProps(innerSvg);
 
 // Convert kebab-case attributes to camelCase for React
 innerSvg = convertAttributesToCamelCase(innerSvg);
 
+// Convert inline styles to JSX format
+innerSvg = convertStylesToJSX(innerSvg);
+
 // Indent the SVG content
-const indentedSvg = innerSvg.split('\n').map(line => '      ' + line).join('\n');
+const indentedSvg = indentSvgContent(innerSvg);
 
-// Generate React component
-const componentTemplate = `import React from 'react';
-
-/**
- * ${iconName} icon component
- * ${generateDescriptionFromComponentName(iconName)}
- */
-export default function ${iconName}SVG(props: React.ComponentProps<"svg">) {
-  const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
-  return (
-    <svg
-      width={width}
-      height={height}
-      {...props}
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-${indentedSvg}
-    </svg>
-  );
-}
-`;
+// Generate React component using centralized template
+const componentTemplate = generateComponentTemplate(
+  iconName,
+  generateDescriptionFromComponentName(iconName),
+  indentedSvg,
+  defaultSize,
+  viewBox
+);
 
 // Write component file
 fs.writeFileSync(outputPath, componentTemplate, 'utf-8');
 console.log(`✓ Created ${iconName}.tsx`);
-
-// Update index.ts
-updateIndexFile(iconName);
-
-/**
- * Update the index.ts file with a new icon export
- * @param {string} newIcon - Component name to add to exports
- */
-function updateIndexFile(newIcon) {
-  const indexPath = path.join(__dirname, '../src/icons/index.ts');
-  let indexContent = fs.readFileSync(indexPath, 'utf-8');
-  
-  // Add export if not already present
-  const exportLine = `export { default as ${newIcon}SVG } from './${newIcon}';`;
-  if (!indexContent.includes(exportLine)) {
-    // Add before the "More icons" comment
-    const lines = indexContent.split('\n');
-    const insertIndex = lines.findIndex(line => line.includes('More icons'));
-    if (insertIndex > 0) {
-      lines.splice(insertIndex, 0, exportLine);
-      indexContent = lines.join('\n');
-    } else {
-      indexContent += '\n' + exportLine;
-    }
-    fs.writeFileSync(indexPath, indexContent, 'utf-8');
-    console.log(`✓ Updated index.ts`);
-  }
-}
 
 console.log('\nNext steps:');
 console.log('1. Review the generated component');

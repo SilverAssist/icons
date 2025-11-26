@@ -11,7 +11,16 @@
 
 const fs = require('fs');
 const path = require('path');
-const { convertAttributesToCamelCase } = require('./utils');
+const { 
+  convertAttributesToCamelCase, 
+  generateComponentTemplate,
+  getViewBox,
+  getDefaultSize,
+  replaceColorsWithProps,
+  convertStylesToJSX,
+  indentSvgContent,
+  extractSvgInnerContent
+} = require('./utils');
 
 const tempSvgsDir = path.join(__dirname, '../temp-svgs');
 const iconsListPath = path.join(tempSvgsDir, 'icons-list.txt');
@@ -61,11 +70,6 @@ lines.forEach((line, index) => {
   }
 });
 
-// Update index.ts with all new icons
-if (createdIcons.length > 0) {
-  updateIndexFile(createdIcons);
-}
-
 console.log(`\n${'='.repeat(50)}`);
 console.log(`Conversion complete!`);
 console.log(`Success: ${successCount} | Errors: ${errorCount}`);
@@ -89,106 +93,33 @@ function convertSvgToComponent(svgPath, componentName, description) {
   const svgContent = fs.readFileSync(svgPath, 'utf-8');
   
   // Extract SVG inner content
-  const svgMatch = svgContent.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
-  if (!svgMatch) {
-    throw new Error('Invalid SVG format');
-  }
+  let innerSvg = extractSvgInnerContent(svgContent);
   
-  let innerSvg = svgMatch[1].trim();
-  
-  // Detect if this is a small icon (50x50) or large icon (100x100)
-  const isSmallIcon = svgContent.includes('viewBox="0 0 50 50"');
-  const viewBox = isSmallIcon ? '0 0 50 50' : '0 0 100 100';
-  const defaultSize = isSmallIcon ? 50 : 100;
+  // Detect icon size and get viewBox/defaultSize
+  const viewBox = getViewBox(svgContent);
+  const defaultSize = getDefaultSize(svgContent);
   
   // Replace default colors with props
-  innerSvg = innerSvg.replace(/fill="#E3F7FB"/gi, 'fill={fill}');
-  innerSvg = innerSvg.replace(/stroke="#3F3F3F"/gi, 'stroke={stroke}');
-  
-  // Replace other common color variations if they match the defaults
-  innerSvg = innerSvg.replace(/fill="#e3f7fb"/gi, 'fill={fill}');
-  innerSvg = innerSvg.replace(/stroke="#3f3f3f"/gi, 'stroke={stroke}');
+  innerSvg = replaceColorsWithProps(innerSvg);
   
   // Convert kebab-case attributes to camelCase for React
   innerSvg = convertAttributesToCamelCase(innerSvg);
   
-  // Fix inline style attributes (convert to JSX object notation)
-  innerSvg = innerSvg.replace(/style="([^"]+)"/gi, (match, styleContent) => {
-    // Convert CSS string to React style object
-    const styleObj = styleContent.split(';')
-      .filter(s => s.trim())
-      .map(s => {
-        const [prop, value] = s.split(':').map(x => x.trim());
-        const camelProp = prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
-        return `${camelProp}: "${value}"`;
-      })
-      .join(', ');
-    return `style={{ ${styleObj} }}`;
-  });
+  // Convert inline styles to JSX format
+  innerSvg = convertStylesToJSX(innerSvg);
   
   // Indent the SVG content
-  const indentedSvg = innerSvg.split('\n')
-    .map(line => line.trim() ? '      ' + line : '')
-    .join('\n');
+  const indentedSvg = indentSvgContent(innerSvg);
   
-  const componentTemplate = `import React from 'react';
-
-/**
- * ${componentName} icon component
- * ${description}
- */
-export default function ${componentName}SVG(props: React.ComponentProps<"svg">) {
-  const { width = ${defaultSize}, height = ${defaultSize}, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
-  return (
-    <svg
-      width={width}
-      height={height}
-      {...props}
-      viewBox="${viewBox}"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-${indentedSvg}
-    </svg>
+  // Generate React component using centralized template
+  const componentTemplate = generateComponentTemplate(
+    componentName,
+    description,
+    indentedSvg,
+    defaultSize,
+    viewBox
   );
-}
-`;
   
   const outputPath = path.join(outputDir, `${componentName}.tsx`);
   fs.writeFileSync(outputPath, componentTemplate, 'utf-8');
-}
-
-/**
- * Update the index.ts file with new icon exports
- * Reads existing exports, adds new ones, sorts alphabetically
- * @param {string[]} newIcons - Array of component names to add
- */
-function updateIndexFile(newIcons) {
-  const indexPath = path.join(outputDir, 'index.ts');
-  
-  // Read existing exports
-  let existingExports = [];
-  if (fs.existsSync(indexPath)) {
-    const content = fs.readFileSync(indexPath, 'utf-8');
-    existingExports = content.match(/export.*from.*['"]\.\/.*['"]/g) || [];
-  }
-  
-  // Add new exports
-  const allExports = [...new Set([
-    ...existingExports,
-    ...newIcons.map(name => `export { default as ${name}SVG } from './${name}';`)
-  ])];
-  
-  // Sort alphabetically
-  allExports.sort();
-  
-  const indexContent = `// Export all icons - Auto-generated
-${allExports.join('\n')}
-
-// Total icons: ${allExports.length}
-// Generated from Figma SilverAssist Library
-`;
-  
-  fs.writeFileSync(indexPath, indexContent, 'utf-8');
-  console.log(`\n✓ Updated index.ts with ${allExports.length} total icons`);
 }
