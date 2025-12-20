@@ -4,7 +4,7 @@ import React from "react";
  * Family icon component
  * Family
  */
-export default function FamilySVG(props: React.ComponentProps<"svg">) {
+export function FamilySVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

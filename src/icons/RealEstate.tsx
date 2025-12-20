@@ -4,7 +4,7 @@ import React from "react";
  * RealEstate icon component
  * Real Estate
  */
-export default function RealEstateSVG(props: React.ComponentProps<"svg">) {
+export function RealEstateSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

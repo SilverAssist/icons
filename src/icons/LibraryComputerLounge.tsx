@@ -4,7 +4,7 @@ import React from "react";
  * LibraryComputerLounge icon component
  * Library computer lounge
  */
-export default function LibraryComputerLoungeSVG(props: React.ComponentProps<"svg">) {
+export function LibraryComputerLoungeSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

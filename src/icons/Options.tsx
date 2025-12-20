@@ -4,7 +4,7 @@ import React from "react";
  * Options icon component
  * options
  */
-export default function OptionsSVG(props: React.ComponentProps<"svg">) {
+export function OptionsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

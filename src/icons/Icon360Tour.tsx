@@ -4,7 +4,7 @@ import React from "react";
  * Icon360Tour icon component
  * 360 Tour
  */
-export default function Icon360TourSVG(props: React.ComponentProps<"svg">) {
+export function Icon360TourSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

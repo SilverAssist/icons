@@ -4,7 +4,7 @@ import React from "react";
  * PersonalLoans icon component
  * Personal Loans
  */
-export default function PersonalLoansSVG(props: React.ComponentProps<"svg">) {
+export function PersonalLoansSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

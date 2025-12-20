@@ -4,7 +4,7 @@ import React from "react";
  * Healthcare icon component
  * Healthcare
  */
-export default function HealthcareSVG(props: React.ComponentProps<"svg">) {
+export function HealthcareSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

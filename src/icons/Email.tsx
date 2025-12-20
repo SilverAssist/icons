@@ -4,7 +4,7 @@ import React from "react";
  * Email icon component
  * email
  */
-export default function EmailSVG(props: React.ComponentProps<"svg">) {
+export function EmailSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

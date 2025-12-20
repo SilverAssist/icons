@@ -4,7 +4,7 @@ import React from "react";
  * Stats icon component
  * stats
  */
-export default function StatsSVG(props: React.ComponentProps<"svg">) {
+export function StatsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

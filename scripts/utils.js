@@ -315,7 +315,7 @@ function generateComponentTemplate(
  * ${componentName} icon component
  * ${description}
  */
-export default function ${componentName}SVG(props: React.ComponentProps<"svg">) {
+export function ${componentName}SVG(props: React.ComponentProps<"svg">) {
   ${destructuring}
   return (
     <svg
@@ -349,7 +349,7 @@ function updateIndexFile(outputDir, iconNames) {
 
   // Generate export statements
   const exports = sortedNames
-    .map((name) => `export { default as ${name}SVG } from "./${name}";`)
+    .map((name) => `export { ${name}SVG } from "./${name}";`)
     .join("\n");
 
   const content = `// Export all icons - Auto-generated
@@ -378,7 +378,7 @@ function addIconToIndex(outputDir, iconName) {
   if (fs.existsSync(indexPath)) {
     const content = fs.readFileSync(indexPath, "utf-8");
     // Extract existing export lines
-    const exportMatches = content.matchAll(/export \{ default as (\w+)SVG \} from/g);
+    const exportMatches = content.matchAll(/export \{ (\w+)SVG \} from/g);
     existingExports = Array.from(exportMatches, (m) => m[1]);
   }
 

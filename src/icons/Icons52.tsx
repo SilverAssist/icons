@@ -4,7 +4,7 @@ import React from "react";
  * Icons52 icon component
  * Icons52
  */
-export default function Icons52SVG(props: React.ComponentProps<"svg">) {
+export function Icons52SVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

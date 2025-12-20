@@ -4,7 +4,7 @@ import React from "react";
  * Learn icon component
  * Learn
  */
-export default function LearnSVG(props: React.ComponentProps<"svg">) {
+export function LearnSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

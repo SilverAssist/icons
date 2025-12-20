@@ -4,7 +4,7 @@ import React from "react";
  * GenericIconsAlt123 icon component
  * Generic Icons Alt123
  */
-export default function GenericIconsAlt123SVG(props: React.ComponentProps<"svg">) {
+export function GenericIconsAlt123SVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#FFFFFF", stroke = "#3F3F3F" } = props;
   return (
     <svg

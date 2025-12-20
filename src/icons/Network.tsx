@@ -4,7 +4,7 @@ import React from "react";
  * Network icon component
  * Network
  */
-export default function NetworkSVG(props: React.ComponentProps<"svg">) {
+export function NetworkSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

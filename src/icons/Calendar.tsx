@@ -4,7 +4,7 @@ import React from "react";
  * Calendar icon component
  * Calendar
  */
-export default function CalendarSVG(props: React.ComponentProps<"svg">) {
+export function CalendarSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

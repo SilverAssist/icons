@@ -4,7 +4,7 @@ import React from "react";
  * BridgeLoan icon component
  * Bridge Loan
  */
-export default function BridgeLoanSVG(props: React.ComponentProps<"svg">) {
+export function BridgeLoanSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

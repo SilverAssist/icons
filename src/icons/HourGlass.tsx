@@ -4,7 +4,7 @@ import React from "react";
  * HourGlass icon component
  * hour glass
  */
-export default function HourGlassSVG(props: React.ComponentProps<"svg">) {
+export function HourGlassSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

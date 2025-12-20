@@ -4,7 +4,7 @@ import React from "react";
  * OutDated icon component
  * out dated
  */
-export default function OutDatedSVG(props: React.ComponentProps<"svg">) {
+export function OutDatedSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

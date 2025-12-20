@@ -4,7 +4,7 @@ import React from "react";
  * Online icon component
  * Online
  */
-export default function OnlineSVG(props: React.ComponentProps<"svg">) {
+export function OnlineSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

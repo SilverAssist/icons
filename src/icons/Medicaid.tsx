@@ -4,7 +4,7 @@ import React from "react";
  * Medicaid icon component
  * Medicaid
  */
-export default function MedicaidSVG(props: React.ComponentProps<"svg">) {
+export function MedicaidSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

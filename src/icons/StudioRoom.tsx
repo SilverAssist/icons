@@ -4,7 +4,7 @@ import React from "react";
  * StudioRoom icon component
  * Studio Room
  */
-export default function StudioRoomSVG(props: React.ComponentProps<"svg">) {
+export function StudioRoomSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#FFFFFF", stroke = "#3F3F3F" } = props;
   return (
     <svg

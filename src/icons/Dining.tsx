@@ -4,7 +4,7 @@ import React from "react";
  * Dining icon component
  * dining
  */
-export default function DiningSVG(props: React.ComponentProps<"svg">) {
+export function DiningSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

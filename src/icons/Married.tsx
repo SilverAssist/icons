@@ -4,7 +4,7 @@ import React from "react";
  * Married icon component
  * married
  */
-export default function MarriedSVG(props: React.ComponentProps<"svg">) {
+export function MarriedSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

@@ -4,7 +4,7 @@ import React from "react";
  * GenericIcons83 icon component
  * Generic Icons83
  */
-export default function GenericIcons83SVG(props: React.ComponentProps<"svg">) {
+export function GenericIcons83SVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

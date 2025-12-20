@@ -4,7 +4,7 @@ import React from "react";
  * LifeInsurance icon component
  * Life Insurance
  */
-export default function LifeInsuranceSVG(props: React.ComponentProps<"svg">) {
+export function LifeInsuranceSVG(props: React.ComponentProps<"svg">) {
   const { width = 53, height = 53, fill = "#003073" } = props;
   return (
     <svg

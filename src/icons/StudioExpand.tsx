@@ -4,7 +4,7 @@ import React from "react";
  * StudioExpand icon component
  * Studio Expand
  */
-export default function StudioExpandSVG(props: React.ComponentProps<"svg">) {
+export function StudioExpandSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#FFFFFF", stroke = "#3F3F3F" } = props;
   return (
     <svg

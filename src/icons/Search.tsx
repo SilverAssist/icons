@@ -4,7 +4,7 @@ import React from "react";
  * Search icon component
  * search
  */
-export default function SearchSVG(props: React.ComponentProps<"svg">) {
+export function SearchSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

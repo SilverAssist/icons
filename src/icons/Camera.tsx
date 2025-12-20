@@ -4,7 +4,7 @@ import React from "react";
  * Camera icon component
  * Camera
  */
-export default function CameraSVG(props: React.ComponentProps<"svg">) {
+export function CameraSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

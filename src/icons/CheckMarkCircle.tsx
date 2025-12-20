@@ -4,7 +4,7 @@ import React from "react";
  * CheckMarkCircle icon component
  * Check Mark Circle
  */
-export default function CheckMarkCircleSVG(props: React.ComponentProps<"svg">) {
+export function CheckMarkCircleSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

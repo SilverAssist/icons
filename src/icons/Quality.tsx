@@ -4,7 +4,7 @@ import React from "react";
  * Quality icon component
  * Quality
  */
-export default function QualitySVG(props: React.ComponentProps<"svg">) {
+export function QualitySVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

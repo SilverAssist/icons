@@ -4,7 +4,7 @@ import React from "react";
  * ReverseMortgage icon component
  * Reverse Mortgage
  */
-export default function ReverseMortgageSVG(props: React.ComponentProps<"svg">) {
+export function ReverseMortgageSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

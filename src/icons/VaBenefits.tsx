@@ -4,7 +4,7 @@ import React from "react";
  * VaBenefits icon component
  * VA Benefits
  */
-export default function VaBenefitsSVG(props: React.ComponentProps<"svg">) {
+export function VaBenefitsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

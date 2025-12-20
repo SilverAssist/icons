@@ -4,7 +4,7 @@ import React from "react";
  * PiggyBank icon component
  * Piggy Bank
  */
-export default function PiggyBankSVG(props: React.ComponentProps<"svg">) {
+export function PiggyBankSVG(props: React.ComponentProps<"svg">) {
   const { width = 52, height = 52, fill = "#003073" } = props;
   return (
     <svg

@@ -4,7 +4,7 @@ import React from "react";
  * Calculator icon component
  * Calculator
  */
-export default function CalculatorSVG(props: React.ComponentProps<"svg">) {
+export function CalculatorSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

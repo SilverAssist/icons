@@ -4,7 +4,7 @@ import React from "react";
  * Integration icon component
  * integration
  */
-export default function IntegrationSVG(props: React.ComponentProps<"svg">) {
+export function IntegrationSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

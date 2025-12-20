@@ -4,7 +4,7 @@ import React from "react";
  * DogTags icon component
  * dog tags
  */
-export default function DogTagsSVG(props: React.ComponentProps<"svg">) {
+export function DogTagsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

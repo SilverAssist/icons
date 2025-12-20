@@ -4,7 +4,7 @@ import React from "react";
  * Church icon component
  * Church
  */
-export default function ChurchSVG(props: React.ComponentProps<"svg">) {
+export function ChurchSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

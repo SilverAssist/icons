@@ -4,7 +4,7 @@ import React from "react";
  * Icon512Mo icon component
  * 5-12 mo
  */
-export default function Icon512MoSVG(props: React.ComponentProps<"svg">) {
+export function Icon512MoSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

@@ -4,7 +4,7 @@ import React from "react";
  * HeartHeadset icon component
  * Heart Headset
  */
-export default function HeartHeadsetSVG(props: React.ComponentProps<"svg">) {
+export function HeartHeadsetSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

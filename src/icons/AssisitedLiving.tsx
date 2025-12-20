@@ -4,7 +4,7 @@ import React from "react";
  * AssisitedLiving icon component
  * Assisited Living
  */
-export default function AssisitedLivingSVG(props: React.ComponentProps<"svg">) {
+export function AssisitedLivingSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

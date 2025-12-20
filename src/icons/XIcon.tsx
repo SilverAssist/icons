@@ -4,7 +4,7 @@ import React from "react";
  * XIcon icon component
  * x icon
  */
-export default function XIconSVG(props: React.ComponentProps<"svg">) {
+export function XIconSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

@@ -4,7 +4,7 @@ import React from "react";
  * Docs icon component
  * Docs
  */
-export default function DocsSVG(props: React.ComponentProps<"svg">) {
+export function DocsSVG(props: React.ComponentProps<"svg">) {
   const { width = 50, height = 50, fill = "#003073" } = props;
   return (
     <svg

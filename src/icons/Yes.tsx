@@ -4,7 +4,7 @@ import React from "react";
  * Yes icon component
  * Yes
  */
-export default function YesSVG(props: React.ComponentProps<"svg">) {
+export function YesSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

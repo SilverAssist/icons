@@ -4,7 +4,7 @@ import React from "react";
  * Franchise icon component
  * franchise
  */
-export default function FranchiseSVG(props: React.ComponentProps<"svg">) {
+export function FranchiseSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg

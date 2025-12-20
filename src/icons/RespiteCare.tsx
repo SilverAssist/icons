@@ -4,7 +4,7 @@ import React from "react";
  * RespiteCare icon component
  * Respite Care
  */
-export default function RespiteCareSVG(props: React.ComponentProps<"svg">) {
+export function RespiteCareSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
   return (
     <svg
