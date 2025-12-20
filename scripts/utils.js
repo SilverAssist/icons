@@ -348,9 +348,7 @@ function updateIndexFile(outputDir, iconNames) {
   const sortedNames = [...iconNames].sort();
 
   // Generate export statements
-  const exports = sortedNames
-    .map((name) => `export { ${name}SVG } from "./${name}";`)
-    .join("\n");
+  const exports = sortedNames.map((name) => `export { ${name}SVG } from "./${name}";`).join("\n");
 
   const content = `// Export all icons - Auto-generated
 ${exports}

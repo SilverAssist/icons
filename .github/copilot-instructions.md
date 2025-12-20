@@ -1,5 +1,23 @@
 # Silver Icons - Copilot Instructions
 
+## Important: GitHub CLI Usage
+
+**CRITICAL:** All `gh` commands MUST be piped through `cat` to prevent terminal control character issues:
+
+```bash
+# ✅ Correct
+gh run view 12345 | cat
+gh pr list | cat
+gh release create v1.0.0 | cat
+
+# ❌ Wrong
+gh run view 12345
+gh pr list
+gh release create v1.0.0
+```
+
+Without `| cat`, the command output may hang or show progress spinners that interfere with command execution.
+
 ## Project Overview
 
 This is a **React icon library** for SilverAssist, built as an NPM package. Icons are sourced from Figma and converted to React components with a standardized API similar to lucide-react.
