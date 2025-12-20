@@ -27,3 +27,20 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Create summary
+        if: success()
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "## 📦 Package Published Successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** \`$PACKAGE_VERSION\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Links" >> $GITHUB_STEP_SUMMARY
+          echo "- [View on npm](https://www.npmjs.com/package/@silverassist/icons/v/$PACKAGE_VERSION)" >> $GITHUB_STEP_SUMMARY
+          echo "- [npm package page](https://www.npmjs.com/package/@silverassist/icons)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📥 Install" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "npm install @silverassist/icons@$PACKAGE_VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
