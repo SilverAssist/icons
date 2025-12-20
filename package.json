@@ -10,6 +10,9 @@
     "url": "https://github.com/SilverAssist/icons/issues"
   },
   "homepage": "https://github.com/SilverAssist/icons#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",

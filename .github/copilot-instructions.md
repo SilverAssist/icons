@@ -198,24 +198,33 @@ function GenerateDescription(icon_name) { /* ... */ }
 - Inline comments for complex logic
 - Keep comments concise and in English
 
-## Publishing to NPM
+## Publishing to npm Registry
 
-**Package is published under the `@silverassist` organization scope.**
+**Package is published to the public npm registry under the `@silverassist` scope.**
 
 ### Prerequisites
-1. NPM account with access to `@silverassist` organization
-2. Login to npm: `npm login`
+1. npm account with access to `@silverassist` organization
+2. `NPM_TOKEN` configured as GitHub secret for automated publishing (granular token with 90-day expiration)
 3. Build must pass: `npm run build`
 
-### Publishing Process
+### Configuration
 
-**First time (initial publish):**
+The project is configured to publish to npm:
+- `package.json` has `publishConfig.access` set to `"public"` (required for scoped packages)
+- GitHub Actions workflow (`.github/workflows/publish.yml`) automates publishing
+- Uses `NPM_TOKEN` secret for authentication
+
+### Manual Publishing
+
+**Authentication:**
 ```bash
-npm run build
-npm publish --access public
+npm login
+# Username: your-npm-username
+# Password: your-npm-password
+# Email: your-email
 ```
 
-**Updates (version increments):**
+**Publish process:**
 ```bash
 # Increment version first
 npm version patch  # 0.1.0 → 0.1.1 (bug fixes)
@@ -226,15 +235,31 @@ npm version major  # 0.1.0 → 1.0.0 (breaking changes)
 npm publish
 ```
 
-### Important Notes
-- Scoped packages (`@silverassist/*`) are private by default - use `--access public`
-- Only `dist/` and `README.md` are published (see `files` in package.json)
-- `prepublishOnly` script ensures build runs before publishing
-- Version must be incremented for each publish
-- License: Polyform Noncommercial License 1.0.0 (NOT MIT)
+### Automated Publishing (Recommended)
+
+The package is automatically published via GitHub Actions when:
+1. A new release is created on GitHub
+2. The workflow is manually triggered via workflow_dispatch
+
+**Setup NPM_TOKEN secret:**
+1. Create npm granular access token: `npm token create --type granular --scope @silverassist --expiration 90d`
+2. Or via web: https://www.npmjs.com/settings/YOUR_USERNAME/tokens (select "Granular Access Token")
+3. Add to GitHub Secrets: https://github.com/SilverAssist/icons/settings/secrets/actions
+4. Name: `NPM_TOKEN`, Value: your token
+5. Important: Enable "Bypass 2FA" and set appropriate org permissions
+
+The workflow:
+- Checks out code
+- Sets up Node.js with npm registry
+- Runs `npm ci` to install dependencies
+- Runs type checking (`npm run typecheck`)
+- Builds the package (`npm run build`)
+- Publishes to npm using `NPM_TOKEN`
 
 ### Package Installation
-Users install with:
+
+Users can install directly from npm:
+
 ```bash
 npm install @silverassist/icons
 ```
@@ -243,3 +268,11 @@ Then import icons:
 ```tsx
 import { QualitySVG, HealthcareSVG } from '@silverassist/icons';
 ```
+
+### Important Notes
+- Package is published to public npm registry (npmjs.com)
+- No authentication needed for users to install (public package)
+- Only `dist/` and `README.md` are published (see `files` in package.json)
+- `prepublishOnly` script ensures build runs before publishing
+- Version must be incremented for each publish
+- License: Polyform Noncommercial License 1.0.0 (NOT MIT)
