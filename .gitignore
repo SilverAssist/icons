@@ -39,3 +39,11 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# e2e fixture artifacts
+e2e/fixture/node_modules/
+e2e/fixture/.next/
+e2e/fixture/package-lock.json
+test-results/
+playwright-report/
+*.tgz

@@ -75,6 +75,16 @@ export default [
     },
   },
   {
-    ignores: ["dist/", "node_modules/", "temp-svgs/", "*.config.mjs", "*.config.js", "*.config.ts"],
+    ignores: [
+      // The e2e fixture installs the packed tarball and builds inside itself.
+      "e2e/fixture/node_modules/**",
+      "e2e/fixture/.next/**",
+      "dist/",
+      "node_modules/",
+      "temp-svgs/",
+      "*.config.mjs",
+      "*.config.js",
+      "*.config.ts",
+    ],
   },
 ];
