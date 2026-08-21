@@ -5,6 +5,7 @@
 This is a **React icon library** for SilverAssist, built as an NPM package. Icons are sourced from Figma and converted to React components with a standardized API.
 
 **Key Architecture:**
+
 - Source: Figma design file (SilverAssist-Library)
 - Build: TypeScript + tsup → dual ESM/CJS outputs
 - Distribution: NPM package `@silverassist/icons`
@@ -43,7 +44,7 @@ silver-icons/
 **ALL icons MUST follow this exact structure:**
 
 ```tsx
-import React from 'react';
+import React from "react";
 
 export default function IconNameSVG(props: React.ComponentProps<"svg">) {
   const { width = 100, height = 100, fill = "#E3F7FB", stroke = "#3F3F3F" } = props;
@@ -63,6 +64,7 @@ export default function IconNameSVG(props: React.ComponentProps<"svg">) {
 ```
 
 **Critical conventions:**
+
 - Component name: `{IconName}SVG` (PascalCase + SVG suffix)
 - Default props: `width=100, height=100, fill="#E3F7FB", stroke="#3F3F3F"`
 - ViewBox: `0 0 100 100` for large icons, `0 0 50 50` for small icons
@@ -89,6 +91,7 @@ export default function IconNameSVG(props: React.ComponentProps<"svg">) {
 5. Save to `temp-svgs/` folder
 
 **Naming conventions from Figma:**
+
 - Large icons: `Generic Icons Alt={name}.svg` → `{Name}SVG`
 - Small icons: `Generic Solid Icons={name}.svg` → `{Name}SVG`
 - Examples:
@@ -102,11 +105,13 @@ npm run convert-svg <filename.svg> <ComponentName>
 ```
 
 Example:
+
 ```bash
 npm run convert-svg "Generic Icons Alt=Quality.svg" Quality
 ```
 
 This will:
+
 - Convert SVG to React component
 - Apply color parameterization
 - Fix style attributes
@@ -118,10 +123,13 @@ If you have many icons to convert:
 
 1. Export all SVGs to `temp-svgs/` folder
 2. Auto-generate the mapping file:
+
    ```bash
    npm run generate-list
    ```
+
    This creates `temp-svgs/icons-list.txt` with format:
+
    ```
    filename.svg|ComponentName|Description
    ```
@@ -132,6 +140,7 @@ If you have many icons to convert:
    ```
 
 This will:
+
 - Process all icons in `icons-list.txt`
 - Create React components in `src/icons/`
 - Auto-update `src/icons/index.ts` with exports
@@ -149,6 +158,7 @@ npm run build
 ## Naming Rules
 
 **From Figma to Component:**
+
 - `Generic Icons Alt=Quality` → `QualitySVG`
 - `Generic Solid Icons=Bridge Loan` → `BridgeLoanSVG`
 - `Generic Icons Alt=360 Tour` → `Icon360TourSVG` (numbers prefixed)
@@ -156,6 +166,7 @@ npm run build
 - `Generic Icons Alt=What?` → `WhatSVG` (`?` removed)
 
 **Special character handling:**
+
 - Numbers at start → prefix with "Icon"
 - `&` → `And`
 - `?` → removed
@@ -164,6 +175,7 @@ npm run build
 ## Build System
 
 **Commands:**
+
 - `npm run build` - Build dist/ with tsup (CJS + ESM + types)
 - `npm run dev` - Watch mode for development
 - `npm run typecheck` - Validate TypeScript without building
@@ -179,12 +191,14 @@ All conversion scripts share common utilities from `scripts/utils.js` to ensure 
 Shared utilities used by all conversion scripts:
 
 **Functions:**
+
 - `convertAttributesToCamelCase(svg)` - Converts kebab-case SVG attributes to camelCase for React
 - `convertToComponentName(name)` - Converts Figma names to PascalCase component names
 - `generateDescription(name)` - Generates human-readable descriptions from icon names
 - `generateDescriptionFromComponentName(componentName)` - Generates descriptions from component names
 
 **Supported attribute conversions:**
+
 - `clip-path` → `clipPath`, `clip-rule` → `clipRule`
 - `fill-opacity` → `fillOpacity`, `fill-rule` → `fillRule`
 - `stroke-*` attributes (width, dasharray, linecap, etc.)
@@ -196,6 +210,7 @@ Shared utilities used by all conversion scripts:
 Auto-generates `temp-svgs/icons-list.txt` from SVG files in `temp-svgs/` folder.
 
 **Logic:**
+
 - Detects naming pattern (Alt= or Solid Icons=)
 - Uses `convertToComponentName()` for PascalCase conversion
 - Handles special characters and number prefixing
@@ -206,6 +221,7 @@ Auto-generates `temp-svgs/icons-list.txt` from SVG files in `temp-svgs/` folder.
 Converts all SVGs listed in `icons-list.txt` to React components.
 
 **Transformations:**
+
 - Replaces `fill="#E3F7FB"` → `fill={fill}`
 - Replaces `stroke="#3F3F3F"` → `stroke={stroke}`
 - Uses `convertAttributesToCamelCase()` for all SVG attributes
@@ -218,6 +234,7 @@ Converts all SVGs listed in `icons-list.txt` to React components.
 Converts a single SVG file.
 
 **Usage:**
+
 ```bash
 npm run convert-svg <svg-file> <ComponentName>
 ```
@@ -227,19 +244,21 @@ npm run convert-svg <svg-file> <ComponentName>
 ## Testing Icons Locally
 
 1. **Link the package:**
+
    ```bash
    npm link
    ```
 
 2. **In your Next.js project:**
+
    ```bash
    npm link @silverassist/icons
    ```
 
 3. **Use the icons:**
    ```tsx
-   import { QualitySVG } from '@silverassist/icons';
-   
+   import { QualitySVG } from "@silverassist/icons";
+
    export default function Page() {
      return <QualitySVG width={50} height={50} fill="#E3F7FB" />;
    }
@@ -248,6 +267,7 @@ npm run convert-svg <svg-file> <ComponentName>
 ## Publishing to NPM
 
 1. **Update version in package.json:**
+
    ```json
    {
      "version": "0.2.0"
@@ -255,9 +275,11 @@ npm run convert-svg <svg-file> <ComponentName>
    ```
 
 2. **Login to NPM (if not already):**
+
    ```bash
    npm login
    ```
+
    Use your credentials for the `silverassist` organization.
 
 3. **Publish:**
@@ -270,6 +292,7 @@ The `prepublishOnly` script will automatically run the build.
 ## Version Management
 
 Follow semantic versioning:
+
 - **Patch** (0.1.x): Bug fixes, small tweaks
 - **Minor** (0.x.0): New icons added
 - **Major** (x.0.0): Breaking changes to component API
@@ -287,6 +310,7 @@ Follow semantic versioning:
 ### TypeScript errors after adding icons
 
 Run `npm run typecheck` to see errors. Common causes:
+
 - Component name starts with number (prefix with "Icon")
 - Style attribute as string instead of object
 - Missing export in `src/icons/index.ts`
@@ -294,6 +318,7 @@ Run `npm run typecheck` to see errors. Common causes:
 ### Icons not showing correct colors
 
 Check that:
+
 - `fill={fill}` is used in paths, not hardcoded `#E3F7FB`
 - `stroke={stroke}` is used in paths, not hardcoded `#3F3F3F`
 - Props are properly destructured in component
@@ -301,6 +326,7 @@ Check that:
 ### Build warnings
 
 If you see warnings about package.json exports, ensure `types` comes before `import` and `require`:
+
 ```json
 "exports": {
   ".": {
@@ -329,7 +355,7 @@ Use JSDoc standard with type definitions for all exported functions:
  */
 function convertAttributesToCamelCase(svg) {
   // Map of SVG attributes that need to be converted
-  const attributeMap = { /* ... */ };
+  const attributeMap = {/* ... */};
   // implementation
 }
 
@@ -344,6 +370,7 @@ function convertToComponentName(name) {
 ```
 
 **Required JSDoc tags:**
+
 - `@param {type} name - description` for all parameters
 - `@returns {type} description` for return values
 - Description of what the function does
@@ -383,30 +410,43 @@ export default function QualitySVG(props: React.ComponentProps<"svg">) {
 #### Variables and Functions
 
 - **Variables:** `camelCase`
+
   ```javascript
-  const svgContent = fs.readFileSync(svgPath, 'utf-8');
-  const iconName = 'Quality';
+  const svgContent = fs.readFileSync(svgPath, "utf-8");
+  const iconName = "Quality";
   const defaultSize = 100;
   ```
 
 - **Functions:** `camelCase`
+
   ```javascript
-  function convertToComponentName(name) { /* ... */ }
-  function generateDescription(iconName) { /* ... */ }
-  function updateIndexFile(newIcons) { /* ... */ }
+  function convertToComponentName(name) {
+    /* ... */
+  }
+  function generateDescription(iconName) {
+    /* ... */
+  }
+  function updateIndexFile(newIcons) {
+    /* ... */
+  }
   ```
 
 - **Constants:** `UPPER_SNAKE_CASE` or `camelCase` for paths
+
   ```javascript
-  const DEFAULT_FILL = '#E3F7FB';
-  const DEFAULT_STROKE = '#3F3F3F';
-  const tempSvgsDir = path.join(__dirname, '../temp-svgs');
+  const DEFAULT_FILL = "#E3F7FB";
+  const DEFAULT_STROKE = "#3F3F3F";
+  const tempSvgsDir = path.join(__dirname, "../temp-svgs");
   ```
 
 - **React Components:** `PascalCase` with `SVG` suffix
   ```typescript
-  export default function QualitySVG(props) { /* ... */ }
-  export default function HealthcareSVG(props) { /* ... */ }
+  export default function QualitySVG(props) {
+    /* ... */
+  }
+  export default function HealthcareSVG(props) {
+    /* ... */
+  }
   ```
 
 #### Function Parameters
@@ -431,7 +471,7 @@ function convertSvgToComponent(svgPath, componentName, description) {
 
 ```javascript
 // Good ✓
-const svgContent = fs.readFileSync(svgPath, 'utf-8');
+const svgContent = fs.readFileSync(svgPath, "utf-8");
 const componentName = convertToComponentName(name);
 const description = `${name} icon`;
 
@@ -440,16 +480,18 @@ if (isValid) {
 }
 
 // Bad ✗
-var svg_content = fs.readFileSync(svg_path, "utf-8");  // var, snake_case, double quotes
-const ComponentName = convert_to_component_name(name);  // PascalCase for variable
-const description = name + " icon";  // string concatenation instead of template literal
+var svg_content = fs.readFileSync(svg_path, "utf-8"); // var, snake_case, double quotes
+const ComponentName = convert_to_component_name(name); // PascalCase for variable
+const description = name + " icon"; // string concatenation instead of template literal
 
-if(isValid){  // missing spaces
-  processIcon(svgContent)
-}  // missing semicolon
+if (isValid) {
+  // missing spaces
+  processIcon(svgContent);
+} // missing semicolon
 ```
 
 **Rules:**
+
 - Use `const` and `let`, never `var`
 - Single quotes for strings: `'hello'` not `"hello"`
 - Template literals for interpolation: `` `${name} icon` ``
@@ -490,6 +532,7 @@ export default function QualitySVG(props: any) {  // any type
 ```
 
 **Rules:**
+
 - Use `import` statements (ES Modules)
 - Proper type annotations for all props
 - No `any` types - use specific types or `React.ComponentProps<>`
@@ -508,31 +551,33 @@ export default function QualitySVG(props: any) {  // any type
  */
 function convertToComponentName(name) {
   // Replace & with And for valid JavaScript identifiers
-  let componentName = name.replace(/\s*&\s*/g, ' And ');
-  
+  let componentName = name.replace(/\s*&\s*/g, " And ");
+
   // Prefix with "Icon" if name starts with number
   if (/^\d/.test(componentName)) {
-    componentName = 'Icon' + componentName;
+    componentName = "Icon" + componentName;
   }
-  
+
   return componentName;
 }
 
 // Bad ✗
 // converts name
-function convertToComponentName(name) {  // missing JSDoc
-  let componentName = name.replace(/\s*&\s*/g, ' And ');  // no explanation why
+function convertToComponentName(name) {
+  // missing JSDoc
+  let componentName = name.replace(/\s*&\s*/g, " And "); // no explanation why
   if (/^\d/.test(componentName)) {
-    componentName = 'Icon' + componentName;  // what does this do?
+    componentName = "Icon" + componentName; // what does this do?
   }
   return componentName;
 }
 ```
 
 **Rules:**
+
 - Use JSDoc for all exported functions
 - Inline comments for complex logic
-- Explain *why*, not *what* (code should be self-explanatory)
+- Explain _why_, not _what_ (code should be self-explanatory)
 - Keep comments concise and in English
 - Update comments when code changes
 
