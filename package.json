@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "dev": "tsup --watch",
+    "dev": "tsdown --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -39,7 +39,9 @@
     "prepublishOnly": "npm run build",
     "convert-svg": "node scripts/convert-svg.js",
     "generate-list": "node scripts/generate-icons-list.js",
-    "bulk-convert": "node scripts/bulk-convert.js"
+    "bulk-convert": "node scripts/bulk-convert.js",
+    "check": "npm run format:check && npm run typecheck && npm run lint",
+    "prepare": "husky || true"
   },
   "keywords": [
     "react",
@@ -61,6 +63,8 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
     "prettier": "^3.6.2",
     "react": "^19.2.3",
     "tsdown": "^0.22.14",
@@ -70,5 +74,13 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs,json,md}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
