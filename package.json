@@ -42,7 +42,7 @@
     "bulk-convert": "node scripts/bulk-convert.js",
     "check": "npm run format:check && npm run typecheck && npm run lint",
     "prepare": "husky || true",
-    "e2e:setup": "sh scripts/e2e-install-fixture.sh",
+    "e2e:setup": "next-testing-toolkit build-fixture --port 3212",
     "e2e": "npm run e2e:setup && playwright test -c e2e/playwright.config.ts"
   },
   "keywords": [
@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
+    "@silverassist/next-testing-toolkit": "^0.2.0",
     "@types/node": "^26.1.0",
     "@types/react": "^19.2.7",
     "eslint": "^9.39.1",
