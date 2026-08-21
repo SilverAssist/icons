@@ -60,7 +60,7 @@
     "components"
   ],
   "author": "Miguel Colmenares <me@miguelcolmenares.com>",
-  "license": "Polyform Noncommercial License 1.0.0",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0"
   },
