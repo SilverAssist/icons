@@ -293,7 +293,7 @@ function generateComponentTemplate(
   defaultSize = 100,
   viewBox = "0 0 100 100",
   defaultFill = "#E3F7FB",
-  includeStroke = true
+  includeStroke = true,
 ) {
   // Build destructuring based on whether stroke is needed
   const destructuring = includeStroke

@@ -11,7 +11,7 @@ import * as path from "path";
 const ICON_TEMPLATE = (
   name: string,
   description: string,
-  svgContent: string
+  svgContent: string,
 ) => `import React from 'react';
 
 /**
