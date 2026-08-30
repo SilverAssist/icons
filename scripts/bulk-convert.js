@@ -143,7 +143,7 @@ function convertSvgToComponent(svgPath, componentName, description) {
     defaultSize,
     viewBox,
     defaultFill,
-    includeStroke
+    includeStroke,
   );
 
   const outputPath = path.join(outputDir, `${componentName}.tsx`);

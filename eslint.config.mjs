@@ -1,20 +1,11 @@
-import js from "@eslint/js";
-import prettier from "eslint-plugin-prettier";
-import prettierRecommended from "eslint-plugin-prettier/recommended";
-import react from "eslint-plugin-react";
-import tseslint from "typescript-eslint";
+import react from "@silverassist/npm-package-standards/eslint/react";
 import { ESLINT_IGNORE_PATTERNS } from "@silverassist/next-testing-toolkit";
+import tseslint from "typescript-eslint";
 
-export default [
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
-  prettierRecommended,
+export default tseslint.config(
+  ...react,
   {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
-    plugins: {
-      react,
-      prettier,
-    },
+    files: ["**/*.{js,mjs,cjs}"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
@@ -29,35 +20,16 @@ export default [
       },
     },
     rules: {
-      "prettier/prettier": "error",
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
       "@typescript-eslint/no-require-imports": "off",
     },
   },
   {
     files: ["**/*.{ts,tsx}"],
-    plugins: {
-      react,
-      prettier,
-    },
-    languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "module",
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
     rules: {
-      "prettier/prettier": "error",
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
+      // Softer than the shared base's "error": this package generates 168
+      // icon components from a script, and a warn-not-error lets that
+      // pipeline output land without blocking on lint until reviewed.
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {
@@ -70,6 +42,8 @@ export default [
     },
   },
   {
+    // Generated icon components legitimately destructure props they don't
+    // all use (a shared signature across 168 auto-generated files).
     files: ["src/icons/**/*.tsx"],
     rules: {
       "@typescript-eslint/no-unused-vars": "off",
@@ -87,4 +61,4 @@ export default [
       "*.config.ts",
     ],
   },
-];
+);

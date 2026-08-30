@@ -89,7 +89,7 @@ const componentTemplate = generateComponentTemplate(
   defaultSize,
   viewBox,
   defaultFill,
-  includeStroke
+  includeStroke,
 );
 
 // Write component file
