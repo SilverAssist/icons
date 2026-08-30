@@ -79,3 +79,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for development instructions.
 ## License
 
 Polyform Noncommercial License 1.0.0 - Silver Assist Team
+
+---
+
+Made with ❤️ by Silver Assist
