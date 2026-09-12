@@ -9,6 +9,14 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "./src"),
+      // Icon components live in ../src/icons, outside this project, and import
+      // "react" via a bare specifier. Node's node_modules resolution walks up
+      // from *their* directory, which never reaches this project's own
+      // node_modules — it only happened to work locally because the repo
+      // root also has react installed (a devDependency there for unrelated
+      // reasons). Alias explicitly so the build doesn't depend on that.
+      react: path.resolve(import.meta.dirname, "node_modules/react"),
+      "react-dom": path.resolve(import.meta.dirname, "node_modules/react-dom"),
     },
   },
   server: {
