@@ -19,9 +19,9 @@ per-icon interactive sandbox.
   respect `fill` for recoloring; `GenericIconsAlt123.tsx` has one hardcoded fill (pre-existing,
   unrelated to this work).
 - `src/icons/index.ts` — auto-generated barrel, `export { XSVG } from "./X"` per icon.
-- 6 icons carry non-semantic filenames from the original SVG import (`GenericIcons70`,
-  `GenericIcons79`, `GenericIcons81`, `GenericIcons82`, `GenericIcons83`, and one more) — no
-  human-readable name to show in a gallery card.
+- 7 icons carry non-semantic filenames from the original SVG import (`GenericIcons70`,
+  `GenericIcons79`, `GenericIcons80`, `GenericIcons81`, `GenericIcons82`, `GenericIcons83`,
+  `GenericIconsAlt123`) — no human-readable name to show in a gallery card.
 - No `site/` directory exists yet. Root `eslint.config.mjs` / `.prettierignore` currently cover
   the whole repo; adding `site/` means carving out an ignore the way `agents-toolkit` did.
 - Reference implementation: `agents-toolkit/site/` — Vite + React 19 + React Router + Tailwind
@@ -264,8 +264,8 @@ affected either way.
   fixture/build globs at the root and needs no change for this work.
 - Infrastructure: GitHub Pages must be enabled for this repo (Settings → Pages → Source →
   GitHub Actions) before the deploy workflow can publish — confirmed via the API
-  (`GET repos/SilverAssist/icons/pages` → 404) that this is **not yet enabled**, unlike
-  `agents-toolkit`. Must be turned on by someone with repo admin before Phase 4's workflow can
-  succeed.
+  (`GET repos/SilverAssist/icons/pages` → 404) that this was **not enabled** when this plan
+  was written. Enabled during Phase 4 implementation via
+  `POST repos/SilverAssist/icons/pages` with `build_type: workflow`.
 - Team coordination: none — this is additive tooling in a repo with no other active work in
   flight on `site/`.
