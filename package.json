@@ -66,21 +66,21 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "^1.63.0",
     "@silverassist/next-testing-toolkit": "^0.2.1",
     "@silverassist/npm-package-standards": "^0.1.0",
-    "@types/node": "^26.1.0",
-    "@types/react": "^19.2.7",
-    "eslint": "^9.39.1",
+    "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
+    "eslint": "^9.39.5",
     "eslint-plugin-react": "^7.37.5",
     "husky": "^9.1.7",
-    "lint-staged": "^17.3.0",
-    "prettier": "^3.6.2",
-    "react": "^19.2.3",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.6",
+    "react": "^19.3.0",
     "tsdown": "^0.23.0",
-    "tsx": "^4.7.0",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.48.0"
+    "typescript-eslint": "^8.70.0"
   },
   "engines": {
     "node": ">=22.0.0"
