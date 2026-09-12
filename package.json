@@ -71,7 +71,7 @@
     "@silverassist/npm-package-standards": "^0.1.0",
     "@types/node": "^26.5.1",
     "@types/react": "^19.3.0",
-    "eslint": "^9.39.5",
+    "eslint": "^10.10.0",
     "eslint-plugin-react": "^7.37.5",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
