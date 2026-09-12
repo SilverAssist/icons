@@ -4,8 +4,7 @@ A documentation microsite for `@silverassist/icons` — a searchable gallery of 
 component the package ships, plus a per-icon sandbox to preview it at any size or color and
 copy the exact import and JSX.
 
-Design: same shadcn-style dark/monospace layout as `agents-toolkit/site`, visually modeled
-after [skills.addy.ie](https://skills.addy.ie/).
+Design: same shadcn-style dark/monospace layout as `agents-toolkit/site`.
 
 ## How content gets in
 
