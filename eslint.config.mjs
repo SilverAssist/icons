@@ -59,6 +59,9 @@ export default tseslint.config(
       "*.config.mjs",
       "*.config.js",
       "*.config.ts",
+      // site/ is a self-contained Vite app with its own tooling (oxlint, tsc) —
+      // the root pipeline doesn't reach into it.
+      "site/**",
     ],
   },
 );

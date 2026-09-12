@@ -1,0 +1,18 @@
+node_modules
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+
+# Regenerated from ../src/icons on every dev/build run — see scripts/generate-content.mjs
+src/content/generated.json
+
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
