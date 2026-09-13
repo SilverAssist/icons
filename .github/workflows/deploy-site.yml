@@ -32,7 +32,21 @@ jobs:
         with:
           node-version: '22.x'
           cache: 'npm'
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            site/package-lock.json
+
+      # Icon components live in ../src/icons, outside site/ -- Vite's builtin
+      # TS transform resolves each transformed file's tsconfig by walking up
+      # from *that file's own directory*, which for those files lands on the
+      # repo root's tsconfig.json, not site/tsconfig.json. Since that root
+      # config extends @silverassist/npm-package-standards/tsconfig/react,
+      # the root node_modules has to exist too, or resolution fails with
+      # "Tsconfig not found @silverassist/npm-package-standards/tsconfig/react"
+      # (see the react/react-dom alias in vite.config.ts for the same class
+      # of cross-boundary resolution issue).
+      - name: Install root dependencies
+        run: npm ci
 
       - name: Install site dependencies
         working-directory: site
